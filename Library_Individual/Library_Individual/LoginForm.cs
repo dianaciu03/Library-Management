@@ -31,10 +31,12 @@ namespace Library_Individual
                         UserForm userForm = new UserForm(currentUser, library, fileManager, userManager);
                         userForm.ShowDialog();
                         this.Close();
+                        break;
                     }
                     else
-                        lblAccountAlreadyExists.Visible = true;
+                        lblEmailPasswordIncorrect.Visible = true;                        
                 }
+
             }
             catch(Exception)
             {
@@ -121,7 +123,7 @@ namespace Library_Individual
             tbNameRegister.Clear();
             tbIDRegister.Clear();
             tbEmailRegister.Clear();
-            tbNameRegister.Clear();
+            tbPasswordRegister.Clear();
 
             //login tab fields
             tbEmailLogin.Clear();

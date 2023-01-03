@@ -28,5 +28,10 @@ namespace Library_Individual
         public string Email { get { return email; } }
         public string Password { get { return password; } }
 
+        public override string ToString()
+        {
+            return this.name;
+        }
+
     }
 }

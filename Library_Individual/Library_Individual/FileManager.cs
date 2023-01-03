@@ -92,7 +92,7 @@ namespace Library_Individual
                 string[] fields;
                 UserManager userManager = new UserManager();
                 //Read the header line and ignore it
-                line = reader.ReadLine();
+                reader.ReadLine();
 
                 //Read the rest of the lines and parse them into User objects
                 while ((line = reader.ReadLine()) != null)

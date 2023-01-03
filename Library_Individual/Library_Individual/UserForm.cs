@@ -23,6 +23,8 @@ namespace Library_Individual
             this.fileManager = fileManager;
             this.library = library;
             this.currentUser = user;
+            //change tab name based on who is logged in
+            this.Text = $"{currentUser}";
         }
 
         private void btnLoanForm_Click(object sender, EventArgs e)
