@@ -12,15 +12,23 @@ namespace Library_Individual
 {
     public partial class UserForm : Form
     {
-        public UserForm()
+        UserManager userManager;
+        FileManager fileManager;
+        Library library;
+        User currentUser;
+        public UserForm(User user, Library library, FileManager fileManager, UserManager userManager)
         {
             InitializeComponent();
+            this.userManager = userManager;
+            this.fileManager = fileManager;
+            this.library = library;
+            this.currentUser = user;
         }
 
         private void btnLoanForm_Click(object sender, EventArgs e)
         {
             this.Hide();
-            LoanForm loanForm = new LoanForm();
+            LoanForm loanForm = new LoanForm(currentUser, library, fileManager, userManager);
             loanForm.ShowDialog();
             this.Close();
         }

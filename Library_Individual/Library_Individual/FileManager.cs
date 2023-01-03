@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -13,7 +14,7 @@ namespace Library_Individual
         private const string filePathLibrary = @"..\..\..\..\LibraryData.txt";
         private const string filePathUsers = @"..\..\..\..\UsersData.csv";
 
-        public Library LoadData()
+        public Library LoadLibraryData()
         {
             try
             {
@@ -44,7 +45,7 @@ namespace Library_Individual
             }
         }
 
-        public void WriteData(Library data)
+        public void WriteLibraryData(Library data)
         {
             try
             {
@@ -68,6 +69,38 @@ namespace Library_Individual
             catch (Exception)
             {
                 return;
+            }
+        }
+
+        public void WriteUsersToCSV(UserManager userManager)
+        {
+            using (StreamWriter writer = new StreamWriter(filePathUsers))
+            {
+                writer.WriteLine("Name,Id,Email,Password");
+                foreach (User user in userManager.GetUsers())
+                {
+                    writer.WriteLine($"{user.Name},{user.Id},{user.Email},{user.Password}");
+                }
+            }
+        }
+
+        public UserManager LoadUsersData() 
+        {
+            using (StreamReader reader = new StreamReader(filePathUsers))
+            {
+                string line;
+                string[] fields;
+                UserManager userManager = new UserManager();
+                //Read the header line and ignore it
+                line = reader.ReadLine();
+
+                //Read the rest of the lines and parse them into User objects
+                while ((line = reader.ReadLine()) != null)
+                {
+                    fields = line.Split(',');
+                    userManager.AddUserToList(new User(fields[0], Convert.ToInt32(fields[1]), fields[2], fields[3]));                      
+                }
+                return userManager;
             }
         }
     }

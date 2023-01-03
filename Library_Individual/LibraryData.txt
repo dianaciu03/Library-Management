@@ -1,0 +1,1 @@
+<Library xmlns="http://schemas.datacontract.org/2004/07/Library_Individual" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><allBooks/><name>Midnight Reads</name></Library>

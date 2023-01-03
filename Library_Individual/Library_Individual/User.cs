@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Library_Individual
 {
+    [DataContract]
     public class User
     {
-        private string name;
-        private int id;
-        private string email;
-        private string password;
+        [DataMember] private string name;
+        [DataMember] private int id;
+        [DataMember] private string email;
+        [DataMember] private string password;
 
         public User(string name, int id, string email, string password)
         {
@@ -20,5 +22,11 @@ namespace Library_Individual
             this.email = email;
             this.password = password;
         }
+
+        public string Name { get { return name; } }
+        public int Id { get { return id; } }
+        public string Email { get { return email; } }
+        public string Password { get { return password; } }
+
     }
 }

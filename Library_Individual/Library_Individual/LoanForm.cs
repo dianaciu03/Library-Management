@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,15 +13,23 @@ namespace Library_Individual
 {
     public partial class LoanForm : Form
     {
-        public LoanForm()
+        UserManager userManager;
+        FileManager fileManager;
+        Library library;
+        User currentUser;
+        public LoanForm(User user, Library library, FileManager fileManager, UserManager userManager)
         {
             InitializeComponent();
+            this.userManager = userManager;
+            this.fileManager = fileManager;
+            this.library = library;
+            this.currentUser = user;
         }
 
         private void btnSubmitLoan_Click(object sender, EventArgs e)
         {
             this.Hide();
-            UserForm userForm = new UserForm();
+            UserForm userForm = new UserForm(currentUser, library, fileManager, userManager);
             userForm.ShowDialog();
             this.Close();
         }

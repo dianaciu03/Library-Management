@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Library_Individual
 {
+    [DataContract]
     public class Book
     {
-        private string title;
-        private string author;
-        private Genre genre;
-        private int numberOfPages;
-        private DateTime publicationDate;
-        private string isbn;
-        private string description;
-        private Loan currentLoan;
-        private List<Loan> loanHistory = new List<Loan>();
+        [DataMember] private string title;
+        [DataMember] private string author;
+        [DataMember] private Genre genre;
+        [DataMember] private int numberOfPages;
+        [DataMember] private DateTime publicationDate;
+        [DataMember] private string isbn;
+        [DataMember] private string description;
+        [DataMember] private Loan currentLoan;
+        [DataMember] private List<Loan> loanHistory = new List<Loan>();
 
         public Book(string title, string author, Genre genre, int numberOfPages, DateTime publicationDate, string isbn, string description)
         {

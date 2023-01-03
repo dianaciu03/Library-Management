@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Library_Individual
 {
+    [DataContract]
     public class Loan
     {
-        private string name;
-        private int ID;
-        private string email;
-        private int phone;
-        private List<Book> books = new List<Book>();
-        private DateTime borrowDate;
-        private DateTime returnDate;
+        [DataMember] private string name;
+        [DataMember] private int ID;
+        [DataMember] private string email;
+        [DataMember] private int phone;
+        [DataMember] private List<Book> books = new List<Book>();
+        [DataMember] private DateTime borrowDate;
+        [DataMember] private DateTime returnDate;
 
         public string GetInfoForThisBook()
         {
