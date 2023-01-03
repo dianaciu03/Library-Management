@@ -19,7 +19,10 @@ namespace Library_Individual
 
         private void btnLoanForm_Click(object sender, EventArgs e)
         {
-            
+            this.Hide();
+            LoanForm loanForm = new LoanForm();
+            loanForm.ShowDialog();
+            this.Close();
         }
     }
 }

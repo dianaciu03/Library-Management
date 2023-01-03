@@ -151,6 +151,7 @@
             this.btnSubmitLoan.TabIndex = 31;
             this.btnSubmitLoan.Text = "Submit loan";
             this.btnSubmitLoan.UseVisualStyleBackColor = false;
+            this.btnSubmitLoan.Click += new System.EventHandler(this.btnSubmitLoan_Click);
             // 
             // btnSearchLoan
             // 

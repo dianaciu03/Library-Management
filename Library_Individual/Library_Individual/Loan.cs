@@ -15,7 +15,28 @@ namespace Library_Individual
         private List<Book> books = new List<Book>();
         private DateTime borrowDate;
         private DateTime returnDate;
-        
+
+        public string GetInfoForThisBook()
+        {
+            return $"{this.name}({this.ID}) Borrow date: {this.borrowDate}, Return date: {this.returnDate}";
+        }
+
+        public string GetInfoCurrentLoan()
+        {
+            return $"{this.name}({this.ID}) on: {this.borrowDate}";
+        }
+
+        public string GetInfoLoanDisplay()
+        {
+            return $"{this.name}({this.ID})";
+        }
+
+        public override string ToString()
+        {
+            return GetInfoLoanDisplay();
+        }
+
+
 
     }
 }

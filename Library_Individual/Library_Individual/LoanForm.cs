@@ -16,5 +16,13 @@ namespace Library_Individual
         {
             InitializeComponent();
         }
+
+        private void btnSubmitLoan_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            UserForm userForm = new UserForm();
+            userForm.ShowDialog();
+            this.Close();
+        }
     }
 }

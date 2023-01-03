@@ -44,11 +44,11 @@
             this.lblPasswordRegister = new System.Windows.Forms.Label();
             this.tbEmailRegister = new System.Windows.Forms.TextBox();
             this.lblEmailRegister = new System.Windows.Forms.Label();
-            this.tbLastNameRegister = new System.Windows.Forms.TextBox();
-            this.lblLastNameRegister = new System.Windows.Forms.Label();
-            this.tbFirstNameRegister = new System.Windows.Forms.TextBox();
+            this.tbIDRegister = new System.Windows.Forms.TextBox();
+            this.lblIDRegister = new System.Windows.Forms.Label();
+            this.tbNameRegister = new System.Windows.Forms.TextBox();
             this.lblTitleRegister = new System.Windows.Forms.Label();
-            this.lblFirstNameRegister = new System.Windows.Forms.Label();
+            this.lblNameRegister = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.tabControlLoginRegister.SuspendLayout();
             this.tabLogin.SuspendLayout();
@@ -163,11 +163,11 @@
             this.tabRegister.Controls.Add(this.lblPasswordRegister);
             this.tabRegister.Controls.Add(this.tbEmailRegister);
             this.tabRegister.Controls.Add(this.lblEmailRegister);
-            this.tabRegister.Controls.Add(this.tbLastNameRegister);
-            this.tabRegister.Controls.Add(this.lblLastNameRegister);
-            this.tabRegister.Controls.Add(this.tbFirstNameRegister);
+            this.tabRegister.Controls.Add(this.tbIDRegister);
+            this.tabRegister.Controls.Add(this.lblIDRegister);
+            this.tabRegister.Controls.Add(this.tbNameRegister);
             this.tabRegister.Controls.Add(this.lblTitleRegister);
-            this.tabRegister.Controls.Add(this.lblFirstNameRegister);
+            this.tabRegister.Controls.Add(this.lblNameRegister);
             this.tabRegister.Location = new System.Drawing.Point(4, 4);
             this.tabRegister.Name = "tabRegister";
             this.tabRegister.Padding = new System.Windows.Forms.Padding(3);
@@ -232,29 +232,29 @@
             this.lblEmailRegister.TabIndex = 6;
             this.lblEmailRegister.Text = "Email:";
             // 
-            // tbLastNameRegister
+            // tbIDRegister
             // 
-            this.tbLastNameRegister.Location = new System.Drawing.Point(17, 165);
-            this.tbLastNameRegister.Name = "tbLastNameRegister";
-            this.tbLastNameRegister.Size = new System.Drawing.Size(431, 34);
-            this.tbLastNameRegister.TabIndex = 5;
+            this.tbIDRegister.Location = new System.Drawing.Point(17, 165);
+            this.tbIDRegister.Name = "tbIDRegister";
+            this.tbIDRegister.Size = new System.Drawing.Size(431, 34);
+            this.tbIDRegister.TabIndex = 5;
             // 
-            // lblLastNameRegister
+            // lblIDRegister
             // 
-            this.lblLastNameRegister.AutoSize = true;
-            this.lblLastNameRegister.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblLastNameRegister.Location = new System.Drawing.Point(17, 139);
-            this.lblLastNameRegister.Name = "lblLastNameRegister";
-            this.lblLastNameRegister.Size = new System.Drawing.Size(92, 23);
-            this.lblLastNameRegister.TabIndex = 4;
-            this.lblLastNameRegister.Text = "Last name:";
+            this.lblIDRegister.AutoSize = true;
+            this.lblIDRegister.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblIDRegister.Location = new System.Drawing.Point(17, 139);
+            this.lblIDRegister.Name = "lblIDRegister";
+            this.lblIDRegister.Size = new System.Drawing.Size(31, 23);
+            this.lblIDRegister.TabIndex = 4;
+            this.lblIDRegister.Text = "ID:";
             // 
-            // tbFirstNameRegister
+            // tbNameRegister
             // 
-            this.tbFirstNameRegister.Location = new System.Drawing.Point(17, 89);
-            this.tbFirstNameRegister.Name = "tbFirstNameRegister";
-            this.tbFirstNameRegister.Size = new System.Drawing.Size(431, 34);
-            this.tbFirstNameRegister.TabIndex = 3;
+            this.tbNameRegister.Location = new System.Drawing.Point(17, 89);
+            this.tbNameRegister.Name = "tbNameRegister";
+            this.tbNameRegister.Size = new System.Drawing.Size(431, 34);
+            this.tbNameRegister.TabIndex = 3;
             // 
             // lblTitleRegister
             // 
@@ -266,15 +266,15 @@
             this.lblTitleRegister.TabIndex = 1;
             this.lblTitleRegister.Text = "Register ";
             // 
-            // lblFirstNameRegister
+            // lblNameRegister
             // 
-            this.lblFirstNameRegister.AutoSize = true;
-            this.lblFirstNameRegister.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblFirstNameRegister.Location = new System.Drawing.Point(17, 63);
-            this.lblFirstNameRegister.Name = "lblFirstNameRegister";
-            this.lblFirstNameRegister.Size = new System.Drawing.Size(93, 23);
-            this.lblFirstNameRegister.TabIndex = 0;
-            this.lblFirstNameRegister.Text = "First name:";
+            this.lblNameRegister.AutoSize = true;
+            this.lblNameRegister.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblNameRegister.Location = new System.Drawing.Point(17, 63);
+            this.lblNameRegister.Name = "lblNameRegister";
+            this.lblNameRegister.Size = new System.Drawing.Size(60, 23);
+            this.lblNameRegister.TabIndex = 0;
+            this.lblNameRegister.Text = "Name:";
             // 
             // lblTitle
             // 
@@ -316,7 +316,7 @@
         private TabControl tabControlLoginRegister;
         private TabPage tabLogin;
         private TabPage tabRegister;
-        private Label lblFirstNameRegister;
+        private Label lblNameRegister;
         private Label lblEmailPasswordIncorrect;
         private Button btnLogin;
         private TextBox tbPasswordLogin;
@@ -329,9 +329,9 @@
         private Label lblPasswordRegister;
         private TextBox tbEmailRegister;
         private Label lblEmailRegister;
-        private TextBox tbLastNameRegister;
-        private Label lblLastNameRegister;
-        private TextBox tbFirstNameRegister;
+        private TextBox tbIDRegister;
+        private Label lblIDRegister;
+        private TextBox tbNameRegister;
         private Label lblTitleRegister;
         private Label lblAccountAlreadyExists;
         private Button btnRegister;
