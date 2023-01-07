@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ComboBox cbGenreBook;
-            System.Windows.Forms.ComboBox cbBookGenreSearch;
-            System.Windows.Forms.ComboBox cbAvailableBooksGenre;
             this.tabControlUserForm = new System.Windows.Forms.TabControl();
             this.tabManageBooks = new System.Windows.Forms.TabPage();
             this.gbSearchBy = new System.Windows.Forms.GroupBox();
+            this.comboBoxGenre = new System.Windows.Forms.ComboBox();
+            this.lbDisplayBooks = new System.Windows.Forms.ListBox();
             this.btnRemoveSelectedBook = new System.Windows.Forms.Button();
             this.btnDisplayAllBooks = new System.Windows.Forms.Button();
             this.lblGenreSearch = new System.Windows.Forms.Label();
@@ -43,6 +42,8 @@
             this.lblTitleSearch = new System.Windows.Forms.Label();
             this.pictureBoxManageBooks = new System.Windows.Forms.PictureBox();
             this.gbAddBook = new System.Windows.Forms.GroupBox();
+            this.tbNoPages = new System.Windows.Forms.TextBox();
+            this.cbGenreBook = new System.Windows.Forms.ComboBox();
             this.btnAddBook = new System.Windows.Forms.Button();
             this.numCopies = new System.Windows.Forms.NumericUpDown();
             this.lblNumberOfCopies = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@
             this.tbISBNBook = new System.Windows.Forms.TextBox();
             this.lblISBNBook = new System.Windows.Forms.Label();
             this.dateTimePublicationDateBook = new System.Windows.Forms.DateTimePicker();
-            this.numNumberOfPagesBook = new System.Windows.Forms.NumericUpDown();
             this.lblPublicationDateBook = new System.Windows.Forms.Label();
             this.lblNumberOfPagesBook = new System.Windows.Forms.Label();
             this.lblGenreBook = new System.Windows.Forms.Label();
@@ -61,12 +61,16 @@
             this.lblTitleBook = new System.Windows.Forms.Label();
             this.tabManageLoans = new System.Windows.Forms.TabPage();
             this.gbLoanStatus = new System.Windows.Forms.GroupBox();
+            this.lbLoanHistory = new System.Windows.Forms.ListBox();
+            this.lbActiveLoans = new System.Windows.Forms.ListBox();
             this.lblHistoryLoans = new System.Windows.Forms.Label();
             this.btnSubmitReturn = new System.Windows.Forms.Button();
             this.dateTimeReturnDate = new System.Windows.Forms.DateTimePicker();
             this.lblReturnDate = new System.Windows.Forms.Label();
             this.lblActiveLoans = new System.Windows.Forms.Label();
             this.bgAvailableBooks = new System.Windows.Forms.GroupBox();
+            this.cbAvailableBooksGenre = new System.Windows.Forms.ComboBox();
+            this.lbAvailableTitles = new System.Windows.Forms.ListBox();
             this.btnLoanForm = new System.Windows.Forms.Button();
             this.btnDisplayAvailableBooks = new System.Windows.Forms.Button();
             this.lblAvailableBooksGenre = new System.Windows.Forms.Label();
@@ -76,56 +80,27 @@
             this.lblAvailableBooksTitle = new System.Windows.Forms.Label();
             this.lblAvailableTitles = new System.Windows.Forms.Label();
             this.lblTitleMidnightReads = new System.Windows.Forms.Label();
-            this.lbDisplayBooks = new System.Windows.Forms.ListBox();
-            this.lbAvailableTitles = new System.Windows.Forms.ListBox();
-            this.lbActiveLoans = new System.Windows.Forms.ListBox();
-            this.lbLoanHistory = new System.Windows.Forms.ListBox();
-            cbGenreBook = new System.Windows.Forms.ComboBox();
-            cbBookGenreSearch = new System.Windows.Forms.ComboBox();
-            cbAvailableBooksGenre = new System.Windows.Forms.ComboBox();
             this.tabControlUserForm.SuspendLayout();
             this.tabManageBooks.SuspendLayout();
             this.gbSearchBy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxManageBooks)).BeginInit();
             this.gbAddBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCopies)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfPagesBook)).BeginInit();
             this.tabManageLoans.SuspendLayout();
             this.gbLoanStatus.SuspendLayout();
             this.bgAvailableBooks.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // cbGenreBook
-            // 
-            cbGenreBook.Location = new System.Drawing.Point(79, 105);
-            cbGenreBook.Name = "cbGenreBook";
-            cbGenreBook.Size = new System.Drawing.Size(266, 31);
-            cbGenreBook.TabIndex = 5;
-            // 
-            // cbBookGenreSearch
-            // 
-            cbBookGenreSearch.Location = new System.Drawing.Point(79, 106);
-            cbBookGenreSearch.Name = "cbBookGenreSearch";
-            cbBookGenreSearch.Size = new System.Drawing.Size(266, 31);
-            cbBookGenreSearch.TabIndex = 11;
-            // 
-            // cbAvailableBooksGenre
-            // 
-            cbAvailableBooksGenre.Location = new System.Drawing.Point(86, 107);
-            cbAvailableBooksGenre.Name = "cbAvailableBooksGenre";
-            cbAvailableBooksGenre.Size = new System.Drawing.Size(378, 31);
-            cbAvailableBooksGenre.TabIndex = 17;
             // 
             // tabControlUserForm
             // 
             this.tabControlUserForm.Controls.Add(this.tabManageBooks);
             this.tabControlUserForm.Controls.Add(this.tabManageLoans);
             this.tabControlUserForm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tabControlUserForm.Location = new System.Drawing.Point(12, 52);
+            this.tabControlUserForm.Location = new System.Drawing.Point(12, 50);
             this.tabControlUserForm.Name = "tabControlUserForm";
             this.tabControlUserForm.Padding = new System.Drawing.Point(20, 4);
             this.tabControlUserForm.SelectedIndex = 0;
-            this.tabControlUserForm.Size = new System.Drawing.Size(1328, 917);
+            this.tabControlUserForm.Size = new System.Drawing.Size(1328, 738);
             this.tabControlUserForm.TabIndex = 4;
             // 
             // tabManageBooks
@@ -136,7 +111,7 @@
             this.tabManageBooks.Location = new System.Drawing.Point(4, 39);
             this.tabManageBooks.Name = "tabManageBooks";
             this.tabManageBooks.Padding = new System.Windows.Forms.Padding(3);
-            this.tabManageBooks.Size = new System.Drawing.Size(1320, 874);
+            this.tabManageBooks.Size = new System.Drawing.Size(1320, 695);
             this.tabManageBooks.TabIndex = 0;
             this.tabManageBooks.Text = "Manage books";
             this.tabManageBooks.UseVisualStyleBackColor = true;
@@ -144,10 +119,10 @@
             // gbSearchBy
             // 
             this.gbSearchBy.BackColor = System.Drawing.Color.Wheat;
+            this.gbSearchBy.Controls.Add(this.comboBoxGenre);
             this.gbSearchBy.Controls.Add(this.lbDisplayBooks);
             this.gbSearchBy.Controls.Add(this.btnRemoveSelectedBook);
             this.gbSearchBy.Controls.Add(this.btnDisplayAllBooks);
-            this.gbSearchBy.Controls.Add(cbBookGenreSearch);
             this.gbSearchBy.Controls.Add(this.lblGenreSearch);
             this.gbSearchBy.Controls.Add(this.tbAuthorSearch);
             this.gbSearchBy.Controls.Add(this.lblAuthorSearch);
@@ -160,6 +135,26 @@
             this.gbSearchBy.TabIndex = 3;
             this.gbSearchBy.TabStop = false;
             this.gbSearchBy.Text = "Search by";
+            // 
+            // comboBoxGenre
+            // 
+            this.comboBoxGenre.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxGenre.FormattingEnabled = true;
+            this.comboBoxGenre.Location = new System.Drawing.Point(79, 107);
+            this.comboBoxGenre.Name = "comboBoxGenre";
+            this.comboBoxGenre.Size = new System.Drawing.Size(266, 31);
+            this.comboBoxGenre.TabIndex = 16;
+            // 
+            // lbDisplayBooks
+            // 
+            this.lbDisplayBooks.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbDisplayBooks.FormattingEnabled = true;
+            this.lbDisplayBooks.HorizontalScrollbar = true;
+            this.lbDisplayBooks.ItemHeight = 23;
+            this.lbDisplayBooks.Location = new System.Drawing.Point(385, 34);
+            this.lbDisplayBooks.Name = "lbDisplayBooks";
+            this.lbDisplayBooks.Size = new System.Drawing.Size(434, 234);
+            this.lbDisplayBooks.TabIndex = 15;
             // 
             // btnRemoveSelectedBook
             // 
@@ -180,6 +175,7 @@
             this.btnDisplayAllBooks.TabIndex = 13;
             this.btnDisplayAllBooks.Text = "Display all books";
             this.btnDisplayAllBooks.UseVisualStyleBackColor = false;
+            this.btnDisplayAllBooks.Click += new System.EventHandler(this.btnDisplayAllBooks_Click);
             // 
             // lblGenreSearch
             // 
@@ -240,6 +236,8 @@
             // gbAddBook
             // 
             this.gbAddBook.BackColor = System.Drawing.Color.Wheat;
+            this.gbAddBook.Controls.Add(this.tbNoPages);
+            this.gbAddBook.Controls.Add(this.cbGenreBook);
             this.gbAddBook.Controls.Add(this.btnAddBook);
             this.gbAddBook.Controls.Add(this.numCopies);
             this.gbAddBook.Controls.Add(this.lblNumberOfCopies);
@@ -248,10 +246,8 @@
             this.gbAddBook.Controls.Add(this.tbISBNBook);
             this.gbAddBook.Controls.Add(this.lblISBNBook);
             this.gbAddBook.Controls.Add(this.dateTimePublicationDateBook);
-            this.gbAddBook.Controls.Add(this.numNumberOfPagesBook);
             this.gbAddBook.Controls.Add(this.lblPublicationDateBook);
             this.gbAddBook.Controls.Add(this.lblNumberOfPagesBook);
-            this.gbAddBook.Controls.Add(cbGenreBook);
             this.gbAddBook.Controls.Add(this.lblGenreBook);
             this.gbAddBook.Controls.Add(this.tbAuthorBook);
             this.gbAddBook.Controls.Add(this.lblAuthorBook);
@@ -265,6 +261,23 @@
             this.gbAddBook.TabStop = false;
             this.gbAddBook.Text = "Add Book";
             // 
+            // tbNoPages
+            // 
+            this.tbNoPages.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbNoPages.Location = new System.Drawing.Point(515, 106);
+            this.tbNoPages.Name = "tbNoPages";
+            this.tbNoPages.Size = new System.Drawing.Size(304, 30);
+            this.tbNoPages.TabIndex = 19;
+            // 
+            // cbGenreBook
+            // 
+            this.cbGenreBook.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cbGenreBook.FormattingEnabled = true;
+            this.cbGenreBook.Location = new System.Drawing.Point(79, 106);
+            this.cbGenreBook.Name = "cbGenreBook";
+            this.cbGenreBook.Size = new System.Drawing.Size(266, 31);
+            this.cbGenreBook.TabIndex = 18;
+            // 
             // btnAddBook
             // 
             this.btnAddBook.BackColor = System.Drawing.Color.White;
@@ -274,6 +287,7 @@
             this.btnAddBook.TabIndex = 17;
             this.btnAddBook.Text = "Add book";
             this.btnAddBook.UseVisualStyleBackColor = false;
+            this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
             // 
             // numCopies
             // 
@@ -296,6 +310,7 @@
             // 
             // tbDescriptionBook
             // 
+            this.tbDescriptionBook.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tbDescriptionBook.Location = new System.Drawing.Point(6, 174);
             this.tbDescriptionBook.Multiline = true;
             this.tbDescriptionBook.Name = "tbDescriptionBook";
@@ -340,15 +355,6 @@
             this.dateTimePublicationDateBook.Name = "dateTimePublicationDateBook";
             this.dateTimePublicationDateBook.Size = new System.Drawing.Size(304, 30);
             this.dateTimePublicationDateBook.TabIndex = 10;
-            // 
-            // numNumberOfPagesBook
-            // 
-            this.numNumberOfPagesBook.AllowDrop = true;
-            this.numNumberOfPagesBook.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numNumberOfPagesBook.Location = new System.Drawing.Point(515, 106);
-            this.numNumberOfPagesBook.Name = "numNumberOfPagesBook";
-            this.numNumberOfPagesBook.Size = new System.Drawing.Size(150, 30);
-            this.numNumberOfPagesBook.TabIndex = 9;
             // 
             // lblPublicationDateBook
             // 
@@ -425,7 +431,7 @@
             this.tabManageLoans.Location = new System.Drawing.Point(4, 39);
             this.tabManageLoans.Name = "tabManageLoans";
             this.tabManageLoans.Padding = new System.Windows.Forms.Padding(3);
-            this.tabManageLoans.Size = new System.Drawing.Size(1320, 874);
+            this.tabManageLoans.Size = new System.Drawing.Size(1320, 695);
             this.tabManageLoans.TabIndex = 1;
             this.tabManageLoans.Text = "Manage loans";
             // 
@@ -446,6 +452,26 @@
             this.gbLoanStatus.TabIndex = 20;
             this.gbLoanStatus.TabStop = false;
             this.gbLoanStatus.Text = "Loan status";
+            // 
+            // lbLoanHistory
+            // 
+            this.lbLoanHistory.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbLoanHistory.FormattingEnabled = true;
+            this.lbLoanHistory.ItemHeight = 23;
+            this.lbLoanHistory.Location = new System.Drawing.Point(22, 332);
+            this.lbLoanHistory.Name = "lbLoanHistory";
+            this.lbLoanHistory.Size = new System.Drawing.Size(697, 234);
+            this.lbLoanHistory.TabIndex = 45;
+            // 
+            // lbActiveLoans
+            // 
+            this.lbActiveLoans.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbActiveLoans.FormattingEnabled = true;
+            this.lbActiveLoans.ItemHeight = 23;
+            this.lbActiveLoans.Location = new System.Drawing.Point(16, 61);
+            this.lbActiveLoans.Name = "lbActiveLoans";
+            this.lbActiveLoans.Size = new System.Drawing.Size(697, 165);
+            this.lbActiveLoans.TabIndex = 44;
             // 
             // lblHistoryLoans
             // 
@@ -501,10 +527,10 @@
             // bgAvailableBooks
             // 
             this.bgAvailableBooks.BackColor = System.Drawing.Color.Wheat;
+            this.bgAvailableBooks.Controls.Add(this.cbAvailableBooksGenre);
             this.bgAvailableBooks.Controls.Add(this.lbAvailableTitles);
             this.bgAvailableBooks.Controls.Add(this.btnLoanForm);
             this.bgAvailableBooks.Controls.Add(this.btnDisplayAvailableBooks);
-            this.bgAvailableBooks.Controls.Add(cbAvailableBooksGenre);
             this.bgAvailableBooks.Controls.Add(this.lblAvailableBooksGenre);
             this.bgAvailableBooks.Controls.Add(this.tbAvailableBooksAuthor);
             this.bgAvailableBooks.Controls.Add(this.lblAvailableBooksAuthor);
@@ -518,6 +544,25 @@
             this.bgAvailableBooks.TabIndex = 0;
             this.bgAvailableBooks.TabStop = false;
             this.bgAvailableBooks.Text = "Available books";
+            // 
+            // cbAvailableBooksGenre
+            // 
+            this.cbAvailableBooksGenre.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cbAvailableBooksGenre.FormattingEnabled = true;
+            this.cbAvailableBooksGenre.Location = new System.Drawing.Point(86, 108);
+            this.cbAvailableBooksGenre.Name = "cbAvailableBooksGenre";
+            this.cbAvailableBooksGenre.Size = new System.Drawing.Size(378, 31);
+            this.cbAvailableBooksGenre.TabIndex = 22;
+            // 
+            // lbAvailableTitles
+            // 
+            this.lbAvailableTitles.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbAvailableTitles.FormattingEnabled = true;
+            this.lbAvailableTitles.ItemHeight = 23;
+            this.lbAvailableTitles.Location = new System.Drawing.Point(13, 253);
+            this.lbAvailableTitles.Name = "lbAvailableTitles";
+            this.lbAvailableTitles.Size = new System.Drawing.Size(451, 257);
+            this.lbAvailableTitles.TabIndex = 21;
             // 
             // btnLoanForm
             // 
@@ -613,46 +658,6 @@
             this.lblTitleMidnightReads.Text = "Midnight Reads";
             this.lblTitleMidnightReads.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbDisplayBooks
-            // 
-            this.lbDisplayBooks.FormattingEnabled = true;
-            this.lbDisplayBooks.HorizontalScrollbar = true;
-            this.lbDisplayBooks.ItemHeight = 23;
-            this.lbDisplayBooks.Location = new System.Drawing.Point(385, 34);
-            this.lbDisplayBooks.Name = "lbDisplayBooks";
-            this.lbDisplayBooks.Size = new System.Drawing.Size(434, 234);
-            this.lbDisplayBooks.TabIndex = 15;
-            // 
-            // lbAvailableTitles
-            // 
-            this.lbAvailableTitles.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbAvailableTitles.FormattingEnabled = true;
-            this.lbAvailableTitles.ItemHeight = 23;
-            this.lbAvailableTitles.Location = new System.Drawing.Point(13, 253);
-            this.lbAvailableTitles.Name = "lbAvailableTitles";
-            this.lbAvailableTitles.Size = new System.Drawing.Size(451, 257);
-            this.lbAvailableTitles.TabIndex = 21;
-            // 
-            // lbActiveLoans
-            // 
-            this.lbActiveLoans.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbActiveLoans.FormattingEnabled = true;
-            this.lbActiveLoans.ItemHeight = 23;
-            this.lbActiveLoans.Location = new System.Drawing.Point(16, 61);
-            this.lbActiveLoans.Name = "lbActiveLoans";
-            this.lbActiveLoans.Size = new System.Drawing.Size(697, 165);
-            this.lbActiveLoans.TabIndex = 44;
-            // 
-            // lbLoanHistory
-            // 
-            this.lbLoanHistory.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbLoanHistory.FormattingEnabled = true;
-            this.lbLoanHistory.ItemHeight = 23;
-            this.lbLoanHistory.Location = new System.Drawing.Point(22, 332);
-            this.lbLoanHistory.Name = "lbLoanHistory";
-            this.lbLoanHistory.Size = new System.Drawing.Size(697, 234);
-            this.lbLoanHistory.TabIndex = 45;
-            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -670,7 +675,6 @@
             this.gbAddBook.ResumeLayout(false);
             this.gbAddBook.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCopies)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfPagesBook)).EndInit();
             this.tabManageLoans.ResumeLayout(false);
             this.gbLoanStatus.ResumeLayout(false);
             this.gbLoanStatus.PerformLayout();
@@ -686,10 +690,8 @@
         private TabPage tabManageBooks;
         private TabPage tabManageLoans;
         private GroupBox gbAddBook;
-        private NumericUpDown numNumberOfPagesBook;
         private Label lblPublicationDateBook;
         private Label lblNumberOfPagesBook;
-        private ComboBox cbGenreBook;
         private Label lblGenreBook;
         private TextBox tbAuthorBook;
         private Label lblAuthorBook;
@@ -732,5 +734,9 @@
         private ListBox lbLoanHistory;
         private ListBox lbActiveLoans;
         private ListBox lbAvailableTitles;
+        private ComboBox comboBoxGenre;
+        private ComboBox cbAvailableBooksGenre;
+        private ComboBox cbGenreBook;
+        private TextBox tbNoPages;
     }
 }

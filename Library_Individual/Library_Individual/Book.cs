@@ -12,15 +12,15 @@ namespace Library_Individual
     {
         [DataMember] private string title;
         [DataMember] private string author;
-        [DataMember] private Genre genre;
+        [DataMember] private BookGenre genre;
         [DataMember] private int numberOfPages;
         [DataMember] private DateTime publicationDate;
-        [DataMember] private string isbn;
+        [DataMember] private long isbn;
         [DataMember] private string description;
         [DataMember] private Loan currentLoan;
         [DataMember] private List<Loan> loanHistory = new List<Loan>();
 
-        public Book(string title, string author, Genre genre, int numberOfPages, DateTime publicationDate, string isbn, string description)
+        public Book(string title, string author, BookGenre genre, int numberOfPages, DateTime publicationDate, long isbn, string description)
         {
             this.title = title;
             this.author = author;
@@ -35,7 +35,7 @@ namespace Library_Individual
 
         public string Author { get { return this.author; } }
 
-        public Genre Genre { get { return this.genre; } }
+        public BookGenre Genre { get { return this.genre; } }
 
         public Loan CurrentLoan
         { 

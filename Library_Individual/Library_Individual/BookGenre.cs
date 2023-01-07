@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace Library_Individual
 {
     [DataContract]
-    public enum Genre
+    public enum BookGenre
     {
         [EnumMember] Fiction,
         [EnumMember] NonFiction,

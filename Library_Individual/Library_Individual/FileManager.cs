@@ -28,7 +28,7 @@ namespace Library_Individual
                     List<Type> auxiliaryTypes = new List<Type>()
                     {
                         typeof(Book),
-                        typeof(Genre),
+                        typeof(BookGenre),
                         typeof(Loan),
                         typeof(User)
                     };
@@ -57,9 +57,10 @@ namespace Library_Individual
                     List<Type> auxiliaryTypes = new List<Type>()
                     {
                         typeof(Book),
-                        typeof(Genre),
+                        typeof(BookGenre),
                         typeof(Loan),
-                        typeof(User)
+                        typeof(User),
+                        typeof(UserManager)
                     };
 
                     DataContractSerializer dcs = new(typeToSerialize);
