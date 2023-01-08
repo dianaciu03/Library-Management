@@ -20,7 +20,7 @@ namespace Library_Individual
 
         public string GetInfoForThisBook()
         {
-            return $"{this.name}({this.ID}) Borrow date: {this.borrowDate}, Return date: {this.returnDate}";
+            return $"{this.name}({this.ID}) Borrow date: {this.borrowDate}, Return date: {this.returnDate}\n";
         }
 
         public string GetInfoCurrentLoan()

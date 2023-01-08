@@ -29,9 +29,13 @@ namespace Library_Individual
             this.currentUser = user;
             //change tab name based on who is logged in
             this.Text = $"{currentUser}";
-            
+            //initialize combo boxes
+            cbGenreBook.SelectedIndex = -1;
+            comboBoxGenre.SelectedIndex = -1;
+            cbAvailableBooksGenre.SelectedIndex = -1;
         }
 
+        //Method to clear fields when a book is added
         private void ClearFields()
         {
             tbTitleBook.Clear();
@@ -44,6 +48,11 @@ namespace Library_Individual
             numCopies.Value = 0;
         }
 
+        //
+        //MANAGE BOOKS TAB
+        //
+
+        //Create book object with input data
         private void btnAddBook_Click(object sender, EventArgs e)
         {
             try
@@ -80,6 +89,72 @@ namespace Library_Individual
             }
         }
 
+        private void btnSearchForBook_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lbDisplayBooks.Items.Clear();
+                string title = tbTitleSearch.Text;
+                string author = tbAuthorSearch.Text;
+                string genre = comboBoxGenre.Text;
+
+                foreach (Book b in library.GetBooksBySearch(title, author, genre))
+                    lbDisplayBooks.Items.Add(b);
+            }
+            catch(Exception)
+            {
+                return;
+            }
+        }
+                
+
+        private void btnDisplayAllBooks_Click(object sender, EventArgs e)
+        {
+            lbDisplayBooks.Items.Clear();
+            foreach (Book b in library.GetBooks())
+                lbDisplayBooks.Items.Add(b);
+        }
+
+        //Display MessageBox with detailed info about the book
+        private void lbDisplayBooks_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Book tempBook = lbDisplayBooks.SelectedItem as Book;
+                MessageBox.Show(tempBook.GetInfoBookDetailed());
+            }
+            catch(Exception)
+            {
+                return;
+            }
+           
+        }
+
+        //Remove book from list
+        private void btnRemoveSelectedBook_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Book tempBook = lbDisplayBooks.SelectedItem as Book;
+                if (tempBook != null)
+                {
+                    if (library.RemoveBookFromList(tempBook) == true)
+                    {
+                        MessageBox.Show("Selected book has been removed from the inventory!");
+                        fileManager.WriteLibraryData(library);
+                    }  
+                    else
+                        MessageBox.Show("Selected book couldn't be found!");
+                }
+                btnDisplayAllBooks_Click(this, EventArgs.Empty);
+            }
+            catch(Exception)
+            {
+                return;
+            }
+            
+        }
+
         private void btnLoanForm_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -88,11 +163,6 @@ namespace Library_Individual
             this.Close();
         }
 
-        private void btnDisplayAllBooks_Click(object sender, EventArgs e)
-        {
-            lbDisplayBooks.Items.Clear();
-            foreach (Book b in library.GetBooks())
-                lbDisplayBooks.Items.Add(b);
-        }
+
     }
 }

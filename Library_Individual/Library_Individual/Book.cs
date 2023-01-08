@@ -50,11 +50,19 @@ namespace Library_Individual
 
         public string GetInfoBookDetailed()
         {
-            string info = $"{this.title}\nBy {this.author}\n\nGenre {this.genre}\nNumber of pages: {this.numberOfPages}\n" +
-                $"Publication date: {this.publicationDate}\nISBN: {this.isbn}\n\nDescription:\n{this.description}\n\n" +
-                $"Current borrower: {this.currentLoan.GetInfoCurrentLoan()}\n";
-            foreach (Loan l in loanHistory)
-                info += l.GetInfoForThisBook();
+            string info = $"{this.title}\nBy {this.author}\n\nGenre: {this.genre}\nNumber of pages: {this.numberOfPages}\n" +
+                $"Publication date: {this.publicationDate.Date}\nISBN: {this.isbn}\n\nDescription:\n{this.description}\n\n";
+            if (currentLoan != null)
+                info += $"Current borrower: {this.currentLoan.GetInfoCurrentLoan()}\n";
+            else
+                info += $"Current borrower: none\n";
+            if (loanHistory.Count > 0)
+            {
+                foreach (Loan l in loanHistory)
+                    info += l.GetInfoForThisBook();
+            }
+            else
+                info += $"Loan history: no data available";
             return info;
         }
 

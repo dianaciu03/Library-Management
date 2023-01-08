@@ -34,6 +34,30 @@ namespace Library_Individual
         {
             return allBooks;
         }
+
+        public List<Book> GetBooksBySearch(string title, string author, string genre)
+        {
+            List<Book> tempList = new List<Book>();
+            foreach(Book book in allBooks)
+            {
+                if((book.Title == title || title == String.Empty) && 
+                    (book.Author == author || author == String.Empty) && 
+                    (book.Genre.ToString() == genre || genre == String.Empty))
+                    tempList.Add(book);
+            }
+            return tempList;
+        }
+
+        public List<Book> GetBooksByGenre(BookGenre genre)
+        {
+            List<Book> tempList = new List<Book>();
+            foreach (Book book in allBooks)
+            {
+                if (book.Genre == genre)
+                    tempList.Add(book);
+            }
+            return tempList;
+        }
     }
 
     
