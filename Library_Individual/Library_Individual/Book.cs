@@ -17,10 +17,11 @@ namespace Library_Individual
         [DataMember] private DateTime publicationDate;
         [DataMember] private long isbn;
         [DataMember] private string description;
+        [DataMember] private int copiesNumber;
         [DataMember] private Loan currentLoan;
         [DataMember] private List<Loan> loanHistory = new List<Loan>();
 
-        public Book(string title, string author, BookGenre genre, int numberOfPages, DateTime publicationDate, long isbn, string description)
+        public Book(string title, string author, BookGenre genre, int numberOfPages, DateTime publicationDate, long isbn, string description, int nrCopies)
         {
             this.title = title;
             this.author = author;
@@ -29,6 +30,7 @@ namespace Library_Individual
             this.publicationDate = publicationDate;
             this.isbn = isbn;
             this.description = description;
+            this.copiesNumber = nrCopies;
         }
 
         public string Title { get { return this.title; } }
@@ -38,9 +40,15 @@ namespace Library_Individual
         public BookGenre Genre { get { return this.genre; } }
 
         public Loan CurrentLoan
-        { 
-            get { return this.currentLoan; } 
+        {
+            get { return this.currentLoan; }
             set { this.currentLoan = value; }
+        }
+
+        public int CopiesNumber 
+        {
+            get { return this.copiesNumber; }
+            set { this.copiesNumber = value; }
         }
 
         public string GetInfoBookDisplay()
@@ -56,6 +64,7 @@ namespace Library_Individual
                 info += $"Current borrower: {this.currentLoan.GetInfoCurrentLoan()}\n";
             else
                 info += $"Current borrower: none\n";
+            info += $"Number of copies left: {this.copiesNumber}\n";
             if (loanHistory.Count > 0)
             {
                 foreach (Loan l in loanHistory)

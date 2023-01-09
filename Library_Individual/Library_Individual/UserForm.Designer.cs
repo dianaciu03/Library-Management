@@ -31,6 +31,10 @@
             this.tabControlUserForm = new System.Windows.Forms.TabControl();
             this.tabManageBooks = new System.Windows.Forms.TabPage();
             this.gbSearchBy = new System.Windows.Forms.GroupBox();
+            this.numCopiesAdd = new System.Windows.Forms.NumericUpDown();
+            this.lblNrCopies = new System.Windows.Forms.Label();
+            this.btnAddCopies = new System.Windows.Forms.Button();
+            this.btnSearchForBook = new System.Windows.Forms.Button();
             this.comboBoxGenre = new System.Windows.Forms.ComboBox();
             this.lbDisplayBooks = new System.Windows.Forms.ListBox();
             this.btnRemoveSelectedBook = new System.Windows.Forms.Button();
@@ -80,10 +84,10 @@
             this.lblAvailableBooksTitle = new System.Windows.Forms.Label();
             this.lblAvailableTitles = new System.Windows.Forms.Label();
             this.lblTitleMidnightReads = new System.Windows.Forms.Label();
-            this.btnSearchForBook = new System.Windows.Forms.Button();
             this.tabControlUserForm.SuspendLayout();
             this.tabManageBooks.SuspendLayout();
             this.gbSearchBy.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCopiesAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxManageBooks)).BeginInit();
             this.gbAddBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCopies)).BeginInit();
@@ -120,6 +124,9 @@
             // gbSearchBy
             // 
             this.gbSearchBy.BackColor = System.Drawing.Color.Wheat;
+            this.gbSearchBy.Controls.Add(this.numCopiesAdd);
+            this.gbSearchBy.Controls.Add(this.lblNrCopies);
+            this.gbSearchBy.Controls.Add(this.btnAddCopies);
             this.gbSearchBy.Controls.Add(this.btnSearchForBook);
             this.gbSearchBy.Controls.Add(this.comboBoxGenre);
             this.gbSearchBy.Controls.Add(this.lbDisplayBooks);
@@ -137,6 +144,47 @@
             this.gbSearchBy.TabIndex = 3;
             this.gbSearchBy.TabStop = false;
             this.gbSearchBy.Text = "Search by";
+            // 
+            // numCopiesAdd
+            // 
+            this.numCopiesAdd.AllowDrop = true;
+            this.numCopiesAdd.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.numCopiesAdd.Location = new System.Drawing.Point(102, 197);
+            this.numCopiesAdd.Name = "numCopiesAdd";
+            this.numCopiesAdd.Size = new System.Drawing.Size(88, 30);
+            this.numCopiesAdd.TabIndex = 20;
+            // 
+            // lblNrCopies
+            // 
+            this.lblNrCopies.AutoSize = true;
+            this.lblNrCopies.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblNrCopies.Location = new System.Drawing.Point(6, 199);
+            this.lblNrCopies.Name = "lblNrCopies";
+            this.lblNrCopies.Size = new System.Drawing.Size(90, 23);
+            this.lblNrCopies.TabIndex = 19;
+            this.lblNrCopies.Text = "No copies:";
+            // 
+            // btnAddCopies
+            // 
+            this.btnAddCopies.BackColor = System.Drawing.Color.White;
+            this.btnAddCopies.Location = new System.Drawing.Point(196, 190);
+            this.btnAddCopies.Name = "btnAddCopies";
+            this.btnAddCopies.Size = new System.Drawing.Size(149, 40);
+            this.btnAddCopies.TabIndex = 18;
+            this.btnAddCopies.Text = "Modify copies";
+            this.btnAddCopies.UseVisualStyleBackColor = false;
+            this.btnAddCopies.Click += new System.EventHandler(this.btnAddCopies_Click);
+            // 
+            // btnSearchForBook
+            // 
+            this.btnSearchForBook.BackColor = System.Drawing.Color.White;
+            this.btnSearchForBook.Location = new System.Drawing.Point(79, 144);
+            this.btnSearchForBook.Name = "btnSearchForBook";
+            this.btnSearchForBook.Size = new System.Drawing.Size(266, 40);
+            this.btnSearchForBook.TabIndex = 17;
+            this.btnSearchForBook.Text = "Search";
+            this.btnSearchForBook.UseVisualStyleBackColor = false;
+            this.btnSearchForBook.Click += new System.EventHandler(this.btnSearchForBook_Click);
             // 
             // comboBoxGenre
             // 
@@ -435,7 +483,7 @@
             this.tabManageLoans.Location = new System.Drawing.Point(4, 39);
             this.tabManageLoans.Name = "tabManageLoans";
             this.tabManageLoans.Padding = new System.Windows.Forms.Padding(3);
-            this.tabManageLoans.Size = new System.Drawing.Size(1320, 695);
+            this.tabManageLoans.Size = new System.Drawing.Size(1320, 743);
             this.tabManageLoans.TabIndex = 1;
             this.tabManageLoans.Text = "Manage loans";
             // 
@@ -452,7 +500,7 @@
             this.gbLoanStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.gbLoanStatus.Location = new System.Drawing.Point(557, 60);
             this.gbLoanStatus.Name = "gbLoanStatus";
-            this.gbLoanStatus.Size = new System.Drawing.Size(733, 586);
+            this.gbLoanStatus.Size = new System.Drawing.Size(733, 602);
             this.gbLoanStatus.TabIndex = 20;
             this.gbLoanStatus.TabStop = false;
             this.gbLoanStatus.Text = "Loan status";
@@ -464,7 +512,7 @@
             this.lbLoanHistory.ItemHeight = 23;
             this.lbLoanHistory.Location = new System.Drawing.Point(22, 332);
             this.lbLoanHistory.Name = "lbLoanHistory";
-            this.lbLoanHistory.Size = new System.Drawing.Size(697, 234);
+            this.lbLoanHistory.Size = new System.Drawing.Size(697, 257);
             this.lbLoanHistory.TabIndex = 45;
             // 
             // lbActiveLoans
@@ -497,6 +545,7 @@
             this.btnSubmitReturn.TabIndex = 42;
             this.btnSubmitReturn.Text = "Submit return";
             this.btnSubmitReturn.UseVisualStyleBackColor = false;
+            this.btnSubmitReturn.Click += new System.EventHandler(this.btnSubmitReturn_Click);
             // 
             // dateTimeReturnDate
             // 
@@ -544,7 +593,7 @@
             this.bgAvailableBooks.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.bgAvailableBooks.Location = new System.Drawing.Point(33, 60);
             this.bgAvailableBooks.Name = "bgAvailableBooks";
-            this.bgAvailableBooks.Size = new System.Drawing.Size(481, 586);
+            this.bgAvailableBooks.Size = new System.Drawing.Size(481, 602);
             this.bgAvailableBooks.TabIndex = 0;
             this.bgAvailableBooks.TabStop = false;
             this.bgAvailableBooks.Text = "Available books";
@@ -563,7 +612,7 @@
             this.lbAvailableTitles.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbAvailableTitles.FormattingEnabled = true;
             this.lbAvailableTitles.ItemHeight = 23;
-            this.lbAvailableTitles.Location = new System.Drawing.Point(13, 253);
+            this.lbAvailableTitles.Location = new System.Drawing.Point(13, 263);
             this.lbAvailableTitles.Name = "lbAvailableTitles";
             this.lbAvailableTitles.Size = new System.Drawing.Size(451, 257);
             this.lbAvailableTitles.TabIndex = 21;
@@ -571,7 +620,7 @@
             // btnLoanForm
             // 
             this.btnLoanForm.BackColor = System.Drawing.Color.White;
-            this.btnLoanForm.Location = new System.Drawing.Point(156, 536);
+            this.btnLoanForm.Location = new System.Drawing.Point(156, 554);
             this.btnLoanForm.Name = "btnLoanForm";
             this.btnLoanForm.Size = new System.Drawing.Size(161, 35);
             this.btnLoanForm.TabIndex = 20;
@@ -590,6 +639,7 @@
             this.btnDisplayAvailableBooks.TabIndex = 19;
             this.btnDisplayAvailableBooks.Text = "Display available books";
             this.btnDisplayAvailableBooks.UseVisualStyleBackColor = false;
+            this.btnDisplayAvailableBooks.Click += new System.EventHandler(this.btnDisplayAvailableBooks_Click);
             // 
             // lblAvailableBooksGenre
             // 
@@ -641,7 +691,7 @@
             // 
             this.lblAvailableTitles.AutoSize = true;
             this.lblAvailableTitles.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblAvailableTitles.Location = new System.Drawing.Point(13, 224);
+            this.lblAvailableTitles.Location = new System.Drawing.Point(13, 234);
             this.lblAvailableTitles.Name = "lblAvailableTitles";
             this.lblAvailableTitles.Size = new System.Drawing.Size(123, 23);
             this.lblAvailableTitles.TabIndex = 1;
@@ -662,17 +712,6 @@
             this.lblTitleMidnightReads.Text = "Midnight Reads";
             this.lblTitleMidnightReads.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnSearchForBook
-            // 
-            this.btnSearchForBook.BackColor = System.Drawing.Color.White;
-            this.btnSearchForBook.Location = new System.Drawing.Point(79, 144);
-            this.btnSearchForBook.Name = "btnSearchForBook";
-            this.btnSearchForBook.Size = new System.Drawing.Size(266, 40);
-            this.btnSearchForBook.TabIndex = 17;
-            this.btnSearchForBook.Text = "Search";
-            this.btnSearchForBook.UseVisualStyleBackColor = false;
-            this.btnSearchForBook.Click += new System.EventHandler(this.btnSearchForBook_Click);
-            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -686,6 +725,7 @@
             this.tabManageBooks.ResumeLayout(false);
             this.gbSearchBy.ResumeLayout(false);
             this.gbSearchBy.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCopiesAdd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxManageBooks)).EndInit();
             this.gbAddBook.ResumeLayout(false);
             this.gbAddBook.PerformLayout();
@@ -754,5 +794,8 @@
         private ComboBox cbGenreBook;
         private TextBox tbNoPages;
         private Button btnSearchForBook;
+        private NumericUpDown numCopiesAdd;
+        private Label lblNrCopies;
+        private Button btnAddCopies;
     }
 }

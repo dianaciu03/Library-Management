@@ -72,7 +72,7 @@ namespace Library_Individual
                     {
                         if (isbn.ToString().Length == 13)
                         {
-                            Book book = new Book(title, author, genre, noPages, publicationDate, isbn, description);
+                            Book book = new Book(title, author, genre, noPages, publicationDate, isbn, description, noCopies);
                             library.AddBookToList(book);
                             MessageBox.Show("New book has been added!");
                             ClearFields();
@@ -106,7 +106,6 @@ namespace Library_Individual
                 return;
             }
         }
-                
 
         private void btnDisplayAllBooks_Click(object sender, EventArgs e)
         {
@@ -151,8 +150,45 @@ namespace Library_Individual
             catch(Exception)
             {
                 return;
+            }  
+        }
+
+        //Add copies to already created books
+        private void btnAddCopies_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Book tempBook = lbDisplayBooks.SelectedItem as Book;
+                int nrCopies = Convert.ToInt32(numCopiesAdd.Text);
+                if (tempBook != null)
+                {
+                    tempBook.CopiesNumber = nrCopies;
+                    MessageBox.Show("The number of copies has been successfully modified!");
+                    fileManager.WriteLibraryData(library);
+                }
             }
-            
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        //
+        //MANAGE LOANS TAB
+        //
+
+        private void btnDisplayAvailableBooks_Click(object sender, EventArgs e)
+        {
+            lbAvailableTitles.Items.Clear();
+            string title = tbAvailableBooksTitle.Text;
+            string author = tbAvailableBooksAuthor.Text;
+            string genre = cbAvailableBooksGenre.Text;
+
+            foreach (Book b in library.GetBooksBySearch(title, author, genre))
+            {
+                if(b.CopiesNumber > 0)
+                    lbAvailableTitles.Items.Add(b);
+            }
         }
 
         private void btnLoanForm_Click(object sender, EventArgs e)
@@ -163,6 +199,9 @@ namespace Library_Individual
             this.Close();
         }
 
+        private void btnSubmitReturn_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
