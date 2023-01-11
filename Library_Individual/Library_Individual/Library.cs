@@ -46,14 +46,6 @@ namespace Library_Individual
             return allLoans;
         }
 
-        private int GetNumberOfCopies()
-        {
-            int numberOfCopies = 0;
-            foreach(Book b in allBooks)
-                numberOfCopies += b.CopiesNumber;
-            return numberOfCopies;
-        }
-
         public List<Book> GetBooksBySearch(string title, string author, string genre)
         {
             List<Book> tempList = new List<Book>();

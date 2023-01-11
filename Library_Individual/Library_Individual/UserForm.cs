@@ -165,7 +165,7 @@ namespace Library_Individual
                 int nrCopies = Convert.ToInt32(numCopiesAdd.Text);
                 if (tempBook != null)
                 {
-                    tempBook.CopiesNumber += nrCopies;
+                    tempBook.CopiesNumber = nrCopies;
                     MessageBox.Show("The number of copies has been successfully modified!");
                     fileManager.WriteLibraryData(library);
                 }
