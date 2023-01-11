@@ -254,6 +254,7 @@ namespace Library_Individual
             LoanForm loanForm = new LoanForm(currentUser, library, fileManager, userManager);
             loanForm.ShowDialog();
             this.Show();
+            UpdateLoanLists();
         }
 
         private void UpdateLoanLists()
@@ -277,5 +278,17 @@ namespace Library_Individual
 
         }
 
+        private void lbAvailableTitles_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Book tempBook = lbDisplayBooks.SelectedItem as Book;
+                MessageBox.Show(tempBook.GetInfoBookDetailed());
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
     }
 }

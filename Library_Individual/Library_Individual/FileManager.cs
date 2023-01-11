@@ -13,6 +13,7 @@ namespace Library_Individual
     {
         private const string filePathLibrary = @"..\..\..\..\LibraryData.xml";
         private const string filePathUsers = @"..\..\..\..\UsersData.csv";
+        private const string filePathMembers = @"..\..\..\..\MembersData.csv";
 
         public Library LoadLibraryData()
         {
@@ -78,6 +79,18 @@ namespace Library_Individual
                 foreach (User user in userManager.GetUsers())
                 {
                     writer.WriteLine($"{user.Name},{user.Id},{user.Email},{user.Password}");
+                }
+            }
+        }
+
+        public void WriteMembersToCSV(Library library)
+        {
+            using (StreamWriter writer = new StreamWriter(filePathMembers))
+            {
+                writer.WriteLine("Name,Id,Email,Phone");
+                foreach (Loan loan in library.GetLoans())
+                {
+                    writer.WriteLine($"{loan.Name},{loan.Id},{loan.Email},{loan.Phone}");
                 }
             }
         }

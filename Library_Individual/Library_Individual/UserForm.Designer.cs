@@ -594,6 +594,7 @@
             this.lbAvailableTitles.Name = "lbAvailableTitles";
             this.lbAvailableTitles.Size = new System.Drawing.Size(451, 257);
             this.lbAvailableTitles.TabIndex = 21;
+            this.lbAvailableTitles.DoubleClick += new System.EventHandler(this.lbAvailableTitles_DoubleClick);
             // 
             // btnLoanForm
             // 

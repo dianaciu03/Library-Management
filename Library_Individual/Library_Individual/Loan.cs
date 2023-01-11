@@ -28,6 +28,14 @@ namespace Library_Individual
             this.borrowDate = borrowDate;
         }
 
+        public string Name { get { return name; } }
+
+        public int Id { get { return ID; } }
+
+        public string Email { get { return email; } }
+
+        public int Phone { get { return phone; } }
+
         public List<Book> Books { get { return this.books; } }
 
         public DateTime ReturnDate

@@ -72,6 +72,7 @@ namespace Library_Individual
                     }
                         
                     fileManager.WriteLibraryData(library);
+                    fileManager.WriteMembersToCSV(library);
                 }
                 //Close loan form and return to the main page
                 btnBack_Click(this, EventArgs.Empty);
