@@ -202,6 +202,7 @@ namespace Library_Individual
             {
                 Loan loan = lbActiveLoans.SelectedItem as Loan;
                 loan.ReturnDate = DateTime.Now;
+                fileManager.SaveToDatabase(loan);
 
                 foreach (Book book in loan.Books)
                 {

@@ -38,6 +38,16 @@ namespace Library_Individual
 
         public List<Book> Books { get { return this.books; } }
 
+        public string StringBooks()
+        {
+            string booksString = "";
+            foreach (Book book in this.books)
+                booksString += $"{book.Title}, ";
+            return booksString;
+        }
+
+        public DateTime BorowDate { get { return this.borrowDate; } }
+
         public DateTime ReturnDate
         {
             get { return returnDate; }

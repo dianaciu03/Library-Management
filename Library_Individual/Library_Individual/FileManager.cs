@@ -1,11 +1,15 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Data.SqlClient;
+using System.Data.Common;
+using System.Transactions;
 
 namespace Library_Individual
 {
@@ -112,6 +116,43 @@ namespace Library_Individual
                     userManager.AddUserToList(new User(fields[0], Convert.ToInt32(fields[1]), fields[2], fields[3]));                      
                 }
                 return userManager;
+            }
+        }
+
+        public void SaveToDatabase(Loan l)
+        {
+            string connectionString = "Server=mssqlstud.fhict.local;Database=dbi505708;User Id=dbi505708;Password=pulamare;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    // Begin a transaction on the connection
+                    SqlTransaction transaction = conn.BeginTransaction();
+
+                    try
+                    {
+                        if(l.ReturnDate.Year != 1)
+                        {
+                            string query = @$"INSERT INTO LoanHistory (Name, Id, Email, Phone, LoanedBooks, BorrowDate, ReturnDate) VALUES ('{l.Name}', '{l.Id}','{l.Email}', '{l.Phone}', '{l.StringBooks()}', '{l.BorowDate}', '{l.ReturnDate}')";
+                            using (SqlCommand command1 = new SqlCommand(query, conn, transaction))
+                            {
+                                int rowsAffected = command1.ExecuteNonQuery();
+                            }
+                        }
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        //If any exceptions were thrown, roll back the transaction
+                        MessageBox.Show($"An error occurred: {ex.Message}");
+                        transaction.Rollback();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
     }
