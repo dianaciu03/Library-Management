@@ -69,8 +69,6 @@
             this.lbActiveLoans = new System.Windows.Forms.ListBox();
             this.lblHistoryLoans = new System.Windows.Forms.Label();
             this.btnSubmitReturn = new System.Windows.Forms.Button();
-            this.dateTimeReturnDate = new System.Windows.Forms.DateTimePicker();
-            this.lblReturnDate = new System.Windows.Forms.Label();
             this.lblActiveLoans = new System.Windows.Forms.Label();
             this.bgAvailableBooks = new System.Windows.Forms.GroupBox();
             this.cbAvailableBooksGenre = new System.Windows.Forms.ComboBox();
@@ -494,8 +492,6 @@
             this.gbLoanStatus.Controls.Add(this.lbActiveLoans);
             this.gbLoanStatus.Controls.Add(this.lblHistoryLoans);
             this.gbLoanStatus.Controls.Add(this.btnSubmitReturn);
-            this.gbLoanStatus.Controls.Add(this.dateTimeReturnDate);
-            this.gbLoanStatus.Controls.Add(this.lblReturnDate);
             this.gbLoanStatus.Controls.Add(this.lblActiveLoans);
             this.gbLoanStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.gbLoanStatus.Location = new System.Drawing.Point(557, 60);
@@ -514,6 +510,7 @@
             this.lbLoanHistory.Name = "lbLoanHistory";
             this.lbLoanHistory.Size = new System.Drawing.Size(697, 257);
             this.lbLoanHistory.TabIndex = 45;
+            this.lbLoanHistory.DoubleClick += new System.EventHandler(this.lbLoanHistory_DoubleClick);
             // 
             // lbActiveLoans
             // 
@@ -522,14 +519,15 @@
             this.lbActiveLoans.ItemHeight = 23;
             this.lbActiveLoans.Location = new System.Drawing.Point(16, 61);
             this.lbActiveLoans.Name = "lbActiveLoans";
-            this.lbActiveLoans.Size = new System.Drawing.Size(697, 165);
+            this.lbActiveLoans.Size = new System.Drawing.Size(697, 188);
             this.lbActiveLoans.TabIndex = 44;
+            this.lbActiveLoans.DoubleClick += new System.EventHandler(this.lbActiveLoans_DoubleClick);
             // 
             // lblHistoryLoans
             // 
             this.lblHistoryLoans.AutoSize = true;
             this.lblHistoryLoans.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblHistoryLoans.Location = new System.Drawing.Point(54, 306);
+            this.lblHistoryLoans.Location = new System.Drawing.Point(22, 306);
             this.lblHistoryLoans.Name = "lblHistoryLoans";
             this.lblHistoryLoans.Size = new System.Drawing.Size(67, 23);
             this.lblHistoryLoans.TabIndex = 43;
@@ -539,33 +537,13 @@
             // 
             this.btnSubmitReturn.BackColor = System.Drawing.Color.White;
             this.btnSubmitReturn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSubmitReturn.Location = new System.Drawing.Point(577, 255);
+            this.btnSubmitReturn.Location = new System.Drawing.Point(289, 255);
             this.btnSubmitReturn.Name = "btnSubmitReturn";
-            this.btnSubmitReturn.Size = new System.Drawing.Size(136, 30);
+            this.btnSubmitReturn.Size = new System.Drawing.Size(161, 37);
             this.btnSubmitReturn.TabIndex = 42;
             this.btnSubmitReturn.Text = "Submit return";
             this.btnSubmitReturn.UseVisualStyleBackColor = false;
             this.btnSubmitReturn.Click += new System.EventHandler(this.btnSubmitReturn_Click);
-            // 
-            // dateTimeReturnDate
-            // 
-            this.dateTimeReturnDate.AllowDrop = true;
-            this.dateTimeReturnDate.CalendarFont = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dateTimeReturnDate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dateTimeReturnDate.Location = new System.Drawing.Point(132, 253);
-            this.dateTimeReturnDate.Name = "dateTimeReturnDate";
-            this.dateTimeReturnDate.Size = new System.Drawing.Size(361, 30);
-            this.dateTimeReturnDate.TabIndex = 41;
-            // 
-            // lblReturnDate
-            // 
-            this.lblReturnDate.AutoSize = true;
-            this.lblReturnDate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblReturnDate.Location = new System.Drawing.Point(22, 259);
-            this.lblReturnDate.Name = "lblReturnDate";
-            this.lblReturnDate.Size = new System.Drawing.Size(104, 23);
-            this.lblReturnDate.TabIndex = 40;
-            this.lblReturnDate.Text = "Return date:";
             // 
             // lblActiveLoans
             // 
@@ -620,7 +598,7 @@
             // btnLoanForm
             // 
             this.btnLoanForm.BackColor = System.Drawing.Color.White;
-            this.btnLoanForm.Location = new System.Drawing.Point(156, 554);
+            this.btnLoanForm.Location = new System.Drawing.Point(146, 554);
             this.btnLoanForm.Name = "btnLoanForm";
             this.btnLoanForm.Size = new System.Drawing.Size(161, 35);
             this.btnLoanForm.TabIndex = 20;
@@ -780,8 +758,6 @@
         private Label lblAvailableBooksTitle;
         private Label lblAvailableTitles;
         private Label lblActiveLoans;
-        private DateTimePicker dateTimeReturnDate;
-        private Label lblReturnDate;
         private Label lblHistoryLoans;
         private Button btnSubmitReturn;
         private Button btnLoanForm;

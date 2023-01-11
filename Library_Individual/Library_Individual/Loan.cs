@@ -18,27 +18,56 @@ namespace Library_Individual
         [DataMember] private DateTime borrowDate;
         [DataMember] private DateTime returnDate;
 
-        public string GetInfoForThisBook()
+        public Loan(string name, int id, string email, int phone, List<Book> books, DateTime borrowDate)
         {
-            return $"{this.name}({this.ID}) Borrow date: {this.borrowDate}, Return date: {this.returnDate}\n";
+            this.name = name;
+            this.ID = id;
+            this.email = email;
+            this.phone = phone;
+            this.books = books;
+            this.borrowDate = borrowDate;
         }
 
-        public string GetInfoCurrentLoan()
+        public List<Book> Books { get { return this.books; } }
+
+        public DateTime ReturnDate
         {
-            return $"{this.name}({this.ID}) on: {this.borrowDate}";
+            get { return returnDate; }
+            set { returnDate = value; }
         }
 
-        public string GetInfoLoanDisplay()
+        public string GetInfoLoanDetailed()
         {
-            return $"{this.name}({this.ID})";
+            string info = $"{this.name}({this.ID})\n\nBorrow date: {this.borrowDate:dd-MM-yyyy}\nReturn date:";
+            if (returnDate.Year == 1)
+                info += "\n";
+            else
+                info += $"{this.returnDate:dd-MM-yyyy}\n";
+            info += "\nContents:\n";
+            foreach(Book book in books)
+                info += $"{book.GetInfoBookDisplay()}\n";
+            return info;
+        }
+
+        public string GetInfoLoan()
+        {
+            return $"{this.name}({this.ID}) borrowed {books.Count} books on: {this.borrowDate:dd-MM-yyyy}";
+        }
+
+        public string GetInfoCurrentLoanForThisBook()
+        {
+            return $"{this.name}({this.ID}) Borrow date: {this.borrowDate:dd-MM-yyyy}";
+        }
+
+        public string GetInfoHistoryLoanForThisBook()
+        {
+            return $"{this.name}({this.ID}) Borrow date: {this.borrowDate:dd-MM-yyyy}, Return date: {this.returnDate:dd-MM-yyyy}";
         }
 
         public override string ToString()
         {
-            return GetInfoLoanDisplay();
+            return GetInfoLoan();
         }
-
-
 
     }
 }

@@ -11,7 +11,7 @@ namespace Library_Individual
 {
     public class FileManager
     {
-        private const string filePathLibrary = @"..\..\..\..\LibraryData.txt";
+        private const string filePathLibrary = @"..\..\..\..\LibraryData.xml";
         private const string filePathUsers = @"..\..\..\..\UsersData.csv";
 
         public Library LoadLibraryData()
@@ -22,7 +22,6 @@ namespace Library_Individual
 
                 using (FileStream fs = new(filePathLibrary, FileMode.Open, FileAccess.Read))
                 {
-                    XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
                     Type typeToSerialize = typeof(Library);
 
                     List<Type> auxiliaryTypes = new List<Type>()
@@ -30,10 +29,10 @@ namespace Library_Individual
                         typeof(Book),
                         typeof(BookGenre),
                         typeof(Loan),
-                        typeof(User)
                     };
 
                     DataContractSerializer dcs = new(typeToSerialize, auxiliaryTypes);
+                    XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
                     libraryData = (Library)dcs.ReadObject(reader, true);
 
                     return libraryData;
@@ -49,7 +48,7 @@ namespace Library_Individual
         {
             try
             {
-                using (FileStream ClearFile = new(filePathLibrary, FileMode.Truncate, FileAccess.Write)) ;
+                using (FileStream ClearFile = new(filePathLibrary, FileMode.Truncate, FileAccess.Write));
                 using (FileStream fs = new(filePathLibrary, FileMode.OpenOrCreate, FileAccess.Write))
                 {
                     Type typeToSerialize = typeof(Library);
@@ -59,8 +58,6 @@ namespace Library_Individual
                         typeof(Book),
                         typeof(BookGenre),
                         typeof(Loan),
-                        typeof(User),
-                        typeof(UserManager)
                     };
 
                     DataContractSerializer dcs = new(typeToSerialize);

@@ -13,10 +13,16 @@ namespace Library_Individual
     {
         [DataMember] private string name = "Midnight Reads";
         [DataMember] private List<Book> allBooks = new List<Book>();
+        [DataMember] private List<Loan> allLoans = new List<Loan>();
 
         public void AddBookToList(Book book)
         {
             allBooks.Add(book);
+        }
+
+        public void AddLoanToList(Loan loan)
+        {
+            allLoans.Add(loan);
         }
 
         public bool RemoveBookFromList(Book book)
@@ -35,6 +41,19 @@ namespace Library_Individual
             return allBooks;
         }
 
+        public List<Loan> GetLoans()
+        {
+            return allLoans;
+        }
+
+        private int GetNumberOfCopies()
+        {
+            int numberOfCopies = 0;
+            foreach(Book b in allBooks)
+                numberOfCopies += b.CopiesNumber;
+            return numberOfCopies;
+        }
+
         public List<Book> GetBooksBySearch(string title, string author, string genre)
         {
             List<Book> tempList = new List<Book>();
@@ -48,16 +67,17 @@ namespace Library_Individual
             return tempList;
         }
 
-        public List<Book> GetBooksByGenre(BookGenre genre)
+        public List<Book> GetBooksByTitle(string title)
         {
             List<Book> tempList = new List<Book>();
             foreach (Book book in allBooks)
             {
-                if (book.Genre == genre)
+                if (book.Title == title && book.CopiesNumber > 0)
                     tempList.Add(book);
             }
             return tempList;
         }
+
     }
 
     

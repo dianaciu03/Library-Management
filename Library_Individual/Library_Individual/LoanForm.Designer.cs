@@ -40,13 +40,12 @@
             this.tbBookTitleLoan = new System.Windows.Forms.TextBox();
             this.btnSubmitLoan = new System.Windows.Forms.Button();
             this.btnSearchLoan = new System.Windows.Forms.Button();
-            this.tbAvailableBooksToBorrow = new System.Windows.Forms.TextBox();
             this.lblEmailBorrower = new System.Windows.Forms.Label();
             this.tbEmailBorrower = new System.Windows.Forms.TextBox();
             this.lblBooksToLoan = new System.Windows.Forms.Label();
-            this.tbBooksToLoan = new System.Windows.Forms.TextBox();
-            this.dateTimeLoan = new System.Windows.Forms.DateTimePicker();
-            this.lblBorrowDateLoan = new System.Windows.Forms.Label();
+            this.lbLoanBooksSearch = new System.Windows.Forms.ListBox();
+            this.lbLoanBooks = new System.Windows.Forms.ListBox();
+            this.btnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitleLoanForm
@@ -145,7 +144,7 @@
             // 
             this.btnSubmitLoan.BackColor = System.Drawing.Color.White;
             this.btnSubmitLoan.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSubmitLoan.Location = new System.Drawing.Point(549, 380);
+            this.btnSubmitLoan.Location = new System.Drawing.Point(528, 362);
             this.btnSubmitLoan.Name = "btnSubmitLoan";
             this.btnSubmitLoan.Size = new System.Drawing.Size(119, 41);
             this.btnSubmitLoan.TabIndex = 31;
@@ -163,14 +162,7 @@
             this.btnSearchLoan.TabIndex = 32;
             this.btnSearchLoan.Text = "Search";
             this.btnSearchLoan.UseVisualStyleBackColor = false;
-            // 
-            // tbAvailableBooksToBorrow
-            // 
-            this.tbAvailableBooksToBorrow.Location = new System.Drawing.Point(528, 179);
-            this.tbAvailableBooksToBorrow.Multiline = true;
-            this.tbAvailableBooksToBorrow.Name = "tbAvailableBooksToBorrow";
-            this.tbAvailableBooksToBorrow.Size = new System.Drawing.Size(382, 140);
-            this.tbAvailableBooksToBorrow.TabIndex = 33;
+            this.btnSearchLoan.Click += new System.EventHandler(this.btnSearchLoan_Click);
             // 
             // lblEmailBorrower
             // 
@@ -200,47 +192,49 @@
             this.lblBooksToLoan.TabIndex = 36;
             this.lblBooksToLoan.Text = "Books to loan:";
             // 
-            // tbBooksToLoan
+            // lbLoanBooksSearch
             // 
-            this.tbBooksToLoan.Location = new System.Drawing.Point(17, 281);
-            this.tbBooksToLoan.Multiline = true;
-            this.tbBooksToLoan.Name = "tbBooksToLoan";
-            this.tbBooksToLoan.Size = new System.Drawing.Size(382, 140);
-            this.tbBooksToLoan.TabIndex = 37;
+            this.lbLoanBooksSearch.FormattingEnabled = true;
+            this.lbLoanBooksSearch.ItemHeight = 20;
+            this.lbLoanBooksSearch.Location = new System.Drawing.Point(528, 180);
+            this.lbLoanBooksSearch.Name = "lbLoanBooksSearch";
+            this.lbLoanBooksSearch.Size = new System.Drawing.Size(382, 144);
+            this.lbLoanBooksSearch.TabIndex = 40;
+            this.lbLoanBooksSearch.SelectedIndexChanged += new System.EventHandler(this.lbLoanBooksSearch_SelectedIndexChanged);
             // 
-            // dateTimeLoan
+            // lbLoanBooks
             // 
-            this.dateTimeLoan.AllowDrop = true;
-            this.dateTimeLoan.CalendarFont = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dateTimeLoan.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dateTimeLoan.Location = new System.Drawing.Point(549, 329);
-            this.dateTimeLoan.Name = "dateTimeLoan";
-            this.dateTimeLoan.Size = new System.Drawing.Size(361, 30);
-            this.dateTimeLoan.TabIndex = 39;
+            this.lbLoanBooks.FormattingEnabled = true;
+            this.lbLoanBooks.ItemHeight = 20;
+            this.lbLoanBooks.Location = new System.Drawing.Point(17, 281);
+            this.lbLoanBooks.Name = "lbLoanBooks";
+            this.lbLoanBooks.Size = new System.Drawing.Size(382, 144);
+            this.lbLoanBooks.TabIndex = 41;
             // 
-            // lblBorrowDateLoan
+            // btnBack
             // 
-            this.lblBorrowDateLoan.AutoSize = true;
-            this.lblBorrowDateLoan.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblBorrowDateLoan.Location = new System.Drawing.Point(436, 335);
-            this.lblBorrowDateLoan.Name = "lblBorrowDateLoan";
-            this.lblBorrowDateLoan.Size = new System.Drawing.Size(107, 23);
-            this.lblBorrowDateLoan.TabIndex = 38;
-            this.lblBorrowDateLoan.Text = "Borrow date:";
+            this.btnBack.BackColor = System.Drawing.Color.White;
+            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBack.Location = new System.Drawing.Point(678, 362);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(119, 41);
+            this.btnBack.TabIndex = 42;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // LoanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Wheat;
-            this.ClientSize = new System.Drawing.Size(930, 446);
-            this.Controls.Add(this.dateTimeLoan);
-            this.Controls.Add(this.lblBorrowDateLoan);
-            this.Controls.Add(this.tbBooksToLoan);
+            this.ClientSize = new System.Drawing.Size(930, 435);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.lbLoanBooks);
+            this.Controls.Add(this.lbLoanBooksSearch);
             this.Controls.Add(this.lblBooksToLoan);
             this.Controls.Add(this.tbEmailBorrower);
             this.Controls.Add(this.lblEmailBorrower);
-            this.Controls.Add(this.tbAvailableBooksToBorrow);
             this.Controls.Add(this.btnSearchLoan);
             this.Controls.Add(this.btnSubmitLoan);
             this.Controls.Add(this.tbBookTitleLoan);
@@ -274,12 +268,11 @@
         private TextBox tbBookTitleLoan;
         private Button btnSubmitLoan;
         private Button btnSearchLoan;
-        private TextBox tbAvailableBooksToBorrow;
         private Label lblEmailBorrower;
         private TextBox tbEmailBorrower;
         private Label lblBooksToLoan;
-        private TextBox tbBooksToLoan;
-        private DateTimePicker dateTimeLoan;
-        private Label lblBorrowDateLoan;
+        private ListBox lbLoanBooksSearch;
+        private ListBox lbLoanBooks;
+        private Button btnBack;
     }
 }

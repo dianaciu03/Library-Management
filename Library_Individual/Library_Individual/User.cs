@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Library_Individual
 {
-    [DataContract]
     public class User
     {
-        [DataMember] private string name;
-        [DataMember] private int id;
-        [DataMember] private string email;
-        [DataMember] private string password;
+        private string name;
+        private int id;
+        private string email;
+        private string password;
 
         public User(string name, int id, string email, string password)
         {

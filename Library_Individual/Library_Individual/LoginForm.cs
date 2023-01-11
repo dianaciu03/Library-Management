@@ -53,36 +53,31 @@ namespace Library_Individual
                 int id = Convert.ToInt32(tbIDRegister.Text);
                 string email = tbEmailRegister.Text;
                 string password = tbPasswordRegister.Text;
+                bool exists = false;
 
                 if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(id.ToString()) && !String.IsNullOrEmpty(email) && !String.IsNullOrEmpty(password))
                 {
                     if (!password.Contains(","))
                     {
-                        //if there are already existing users, I check if the there is an account with the given id, because the id is unique
-                        if (userManager.GetUsers().Count() > 0)
+                        foreach (User u in userManager.GetUsers())
                         {
-                            foreach (User u in userManager.GetUsers())
+                            if (u.Id == id) //if the id matches, the account is already registered
                             {
-                                if (u.Id == id) //if the id matches, the account is already registered
-                                {
-                                    lblAccountAlreadyExists.Visible = true;
-                                    ClearFields();
-                                }
-                                else //create an account
-                                {
-                                    User user = new User(name, id, email, password);
-                                    userManager.AddUserToList(user);
-                                    MessageBox.Show("Account created successfully!");
-                                    ClearFields();
-                                }
+                                exists = true;
                             }
                         }
-                        //if this is the first user, I create the account instantly
-                        else
+
+                        if (exists == false) //create an account
                         {
                             User user = new User(name, id, email, password);
                             userManager.AddUserToList(user);
                             MessageBox.Show("Account created successfully!");
+                            fileManager.WriteUsersToCSV(userManager);
+                            ClearFields();
+                        }
+                        else 
+                        {
+                            lblAccountAlreadyExists.Visible = true;
                             ClearFields();
                         }
                     }
@@ -98,7 +93,6 @@ namespace Library_Individual
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            fileManager.WriteLibraryData(library);
             fileManager.WriteUsersToCSV(userManager);
         }
 
@@ -107,8 +101,8 @@ namespace Library_Individual
         {
             try
             {
-                library = fileManager.LoadLibraryData();
                 userManager = fileManager.LoadUsersData();
+                library = fileManager.LoadLibraryData();
             }
             catch (Exception)
             {

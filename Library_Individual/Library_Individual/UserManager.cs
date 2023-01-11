@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Library_Individual
 {
-    [DataContract]
     public class UserManager
     {
-        [DataMember] List<User> allUsers = new List<User>();
+        private List<User> allUsers = new List<User>();
 
         public void AddUserToList(User user)
         {

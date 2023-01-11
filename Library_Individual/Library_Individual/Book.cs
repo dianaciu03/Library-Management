@@ -18,8 +18,8 @@ namespace Library_Individual
         [DataMember] private long isbn;
         [DataMember] private string description;
         [DataMember] private int copiesNumber;
-        [DataMember] private Loan currentLoan;
-        [DataMember] private List<Loan> loanHistory = new List<Loan>();
+        [DataMember] private List<string> currentLoan = new List<string>();
+        [DataMember] private List<string> loanHistory = new List<string>();
 
         public Book(string title, string author, BookGenre genre, int numberOfPages, DateTime publicationDate, long isbn, string description, int nrCopies)
         {
@@ -39,13 +39,32 @@ namespace Library_Individual
 
         public BookGenre Genre { get { return this.genre; } }
 
-        public Loan CurrentLoan
+        public void AddCurrentLoan(Loan loan)
         {
-            get { return this.currentLoan; }
-            set { this.currentLoan = value; }
+            if(!currentLoan.Contains(loan.GetInfoCurrentLoanForThisBook()))
+                currentLoan.Add(loan.GetInfoCurrentLoanForThisBook());
         }
 
-        public int CopiesNumber 
+        public List<string> GetCurrentLoans()
+        {
+            return this.currentLoan;
+        }
+
+        public List<string> GetHistoryLoans()
+        {
+            return this.currentLoan;
+        }
+
+        public void MoveCurrentLoanToHistory(Loan loan)
+        {
+            if (currentLoan.Contains(loan.GetInfoCurrentLoanForThisBook()))
+            {
+                currentLoan.Remove(loan.GetInfoCurrentLoanForThisBook());
+                loanHistory.Add(loan.GetInfoHistoryLoanForThisBook());
+            }
+        }
+
+        public int CopiesNumber
         {
             get { return this.copiesNumber; }
             set { this.copiesNumber = value; }
@@ -59,16 +78,23 @@ namespace Library_Individual
         public string GetInfoBookDetailed()
         {
             string info = $"{this.title}\nBy {this.author}\n\nGenre: {this.genre}\nNumber of pages: {this.numberOfPages}\n" +
-                $"Publication date: {this.publicationDate.Date}\nISBN: {this.isbn}\n\nDescription:\n{this.description}\n\n";
-            if (currentLoan != null)
-                info += $"Current borrower: {this.currentLoan.GetInfoCurrentLoan()}\n";
+                $"Publication date: {this.publicationDate:dd-MM-yyyy}\nISBN: {this.isbn}\n\nDescription:\n{this.description}\n\n";
+
+            if (currentLoan.Count() > 0)
+            {
+                info += $"Current borrowers:\n";
+                foreach (string l in currentLoan)
+                    info += $"{l}\n";
+            }
+
             else
-                info += $"Current borrower: none\n";
+                info += $"Current borrowers: none\n";
             info += $"Number of copies left: {this.copiesNumber}\n";
             if (loanHistory.Count > 0)
             {
-                foreach (Loan l in loanHistory)
-                    info += l.GetInfoForThisBook();
+                info += $"Loan history:\n";
+                foreach (string l in loanHistory)
+                    info += $"{l}\n";
             }
             else
                 info += $"Loan history: no data available";
@@ -79,7 +105,5 @@ namespace Library_Individual
         {
             return GetInfoBookDisplay();
         }
-
     }
-
 }

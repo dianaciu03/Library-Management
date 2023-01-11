@@ -33,6 +33,8 @@ namespace Library_Individual
             cbGenreBook.SelectedIndex = -1;
             comboBoxGenre.SelectedIndex = -1;
             cbAvailableBooksGenre.SelectedIndex = -1;
+
+            UpdateLoanLists();
         }
 
         //Method to clear fields when a book is added
@@ -76,6 +78,7 @@ namespace Library_Individual
                             library.AddBookToList(book);
                             MessageBox.Show("New book has been added!");
                             ClearFields();
+                            btnDisplayAllBooks_Click(this, EventArgs.Empty);
                             fileManager.WriteLibraryData(library);
                         }
                     }
@@ -135,7 +138,7 @@ namespace Library_Individual
             try
             {
                 Book tempBook = lbDisplayBooks.SelectedItem as Book;
-                if (tempBook != null)
+                if (tempBook != null && tempBook.GetCurrentLoans().Count() > 0)
                 {
                     if (library.RemoveBookFromList(tempBook) == true)
                     {
@@ -153,7 +156,7 @@ namespace Library_Individual
             }  
         }
 
-        //Add copies to already created books
+        //Add to already created books
         private void btnAddCopies_Click(object sender, EventArgs e)
         {
             try
@@ -162,7 +165,7 @@ namespace Library_Individual
                 int nrCopies = Convert.ToInt32(numCopiesAdd.Text);
                 if (tempBook != null)
                 {
-                    tempBook.CopiesNumber = nrCopies;
+                    tempBook.CopiesNumber += nrCopies;
                     MessageBox.Show("The number of copies has been successfully modified!");
                     fileManager.WriteLibraryData(library);
                 }
@@ -177,6 +180,7 @@ namespace Library_Individual
         //MANAGE LOANS TAB
         //
 
+        //Display which books still have copies in the library
         private void btnDisplayAvailableBooks_Click(object sender, EventArgs e)
         {
             lbAvailableTitles.Items.Clear();
@@ -191,17 +195,87 @@ namespace Library_Individual
             }
         }
 
+        //Close a loan when the books have been returned and update the history
+        private void btnSubmitReturn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Loan loan = lbActiveLoans.SelectedItem as Loan;
+                loan.ReturnDate = DateTime.Now;
+
+                foreach (Book book in loan.Books)
+                {
+                    book.MoveCurrentLoanToHistory(loan);
+                    book.CopiesNumber++;
+                }
+                btnDisplayAvailableBooks_Click(this, EventArgs.Empty);
+                UpdateLoanLists();
+                fileManager.WriteLibraryData(library);
+            }
+            catch(Exception)
+            {
+                return;
+            }
+            
+        }
+
+        //Get detailed information about an active loan
+        private void lbActiveLoans_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Loan tempLoan = lbActiveLoans.SelectedItem as Loan;
+                MessageBox.Show(tempLoan.GetInfoLoanDetailed());
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        //Get detailed information about a submitted loan
+        private void lbLoanHistory_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Loan tempLoan = lbLoanHistory.SelectedItem as Loan;
+                MessageBox.Show(tempLoan.GetInfoLoanDetailed());
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        //Open the loan form
         private void btnLoanForm_Click(object sender, EventArgs e)
         {
             this.Hide();
             LoanForm loanForm = new LoanForm(currentUser, library, fileManager, userManager);
             loanForm.ShowDialog();
-            this.Close();
+            this.Show();
         }
 
-        private void btnSubmitReturn_Click(object sender, EventArgs e)
+        private void UpdateLoanLists()
         {
+            try
+            {
+                lbActiveLoans.Items.Clear();
+                lbLoanHistory.Items.Clear();
+                foreach (Loan loan in library.GetLoans())
+                {
+                    if (loan.ReturnDate.Year == 1)
+                        lbActiveLoans.Items.Add(loan);
+                    else
+                        lbLoanHistory.Items.Add(loan);
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
 
         }
+
     }
 }
