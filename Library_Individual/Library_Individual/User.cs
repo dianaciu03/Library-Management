@@ -7,30 +7,24 @@ using System.Threading.Tasks;
 
 namespace Library_Individual
 {
-    public class User
+    [DataContract]
+    public abstract class User
     {
-        private string name;
-        private int id;
-        private string email;
-        private string password;
+        [DataMember] private string _name;
+        [DataMember] private int _id;
+        [DataMember] private string _email;
 
-        public User(string name, int id, string email, string password)
+        public User(string name, int id, string email)
         {
-            this.name = name;
-            this.id = id;
-            this.email = email;
-            this.password = password;
+            Name = name;
+            Id = id;
+            Email = email;
         }
 
-        public string Name { get { return name; } }
-        public int Id { get { return id; } }
-        public string Email { get { return email; } }
-        public string Password { get { return password; } }
+        public string Name { get { return _name; } set { _name = value; } }
 
-        public override string ToString()
-        {
-            return this.name;
-        }
+        public int Id { get { return _id; } set { _id = value; } }
 
+        public string Email { get { return _email; } set { _email = value; } }
     }
 }

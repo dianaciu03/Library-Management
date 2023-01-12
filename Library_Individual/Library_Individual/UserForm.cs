@@ -15,24 +15,25 @@ namespace Library_Individual
         UserManager userManager;
         FileManager fileManager;
         Library library;
-        User currentUser;
-        public UserForm(User user, Library library, FileManager fileManager, UserManager userManager)
+        Employee currentUser;
+        public UserForm(Employee employee, Library library, FileManager fileManager, UserManager userManager)
         {
             InitializeComponent();
+            //Initialize ComboBoxes
             cbGenreBook.DataSource = Enum.GetValues(typeof(BookGenre));
             comboBoxGenre.DataSource = Enum.GetValues(typeof(BookGenre));
             cbAvailableBooksGenre.DataSource = Enum.GetValues(typeof(BookGenre));
 
-            this.userManager = userManager;
-            this.fileManager = fileManager;
-            this.library = library;
-            this.currentUser = user;
-            //change tab name based on who is logged in
-            this.Text = $"{currentUser}";
-            //initialize combo boxes
             cbGenreBook.SelectedIndex = -1;
             comboBoxGenre.SelectedIndex = -1;
             cbAvailableBooksGenre.SelectedIndex = -1;
+
+            this.userManager = userManager;
+            this.fileManager = fileManager;
+            this.library = library;
+            this.currentUser = employee;
+            //change tab name based on who is logged in
+            this.Text = $"{currentUser}";           
 
             UpdateLoanLists();
         }
@@ -59,6 +60,7 @@ namespace Library_Individual
         {
             try
             {
+                //Get Info from TextBoxes
                 string title = tbTitleBook.Text;
                 string author = tbAuthorBook.Text;
                 BookGenre genre = (BookGenre)cbGenreBook.SelectedItem;
@@ -68,26 +70,32 @@ namespace Library_Individual
                 int noPages = Convert.ToInt32(tbNoPages.Text);
                 int noCopies = Convert.ToInt32(numCopies.Value);
 
+                //Check if the variables contain information
                 if (!String.IsNullOrEmpty(title) && !String.IsNullOrEmpty(author) && !String.IsNullOrEmpty(description) && !String.IsNullOrEmpty(isbn.ToString()) && !String.IsNullOrEmpty(noPages.ToString()))
                 {
+                    //Check if the Genre ComboBox has been modified
                     if (Enum.IsDefined(typeof(BookGenre), genre))
                     {
+                        //Check if the ISBN is the correct length
                         if (isbn.ToString().Length == 13)
                         {
+                            //If it reaches here, create book object will all the correct info
                             Book book = new Book(title, author, genre, noPages, publicationDate, isbn, description, noCopies);
                             library.AddBookToList(book);
                             MessageBox.Show("New book has been added!");
                             ClearFields();
+                            //Update ListBox with by auto-pressing the button
                             btnDisplayAllBooks_Click(this, EventArgs.Empty);
+                            //Update the file
                             fileManager.WriteLibraryData(library);
                         }
                     }
                 }
 
             }
-            catch(Exception ex)
+            catch(FormatException)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Information is not in correct format!");
                 return;
             }
         }

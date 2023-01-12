@@ -309,7 +309,6 @@
             this.tabRegister.ResumeLayout(false);
             this.tabRegister.PerformLayout();
             this.ResumeLayout(false);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_FormClosing);
         }
 
         #endregion

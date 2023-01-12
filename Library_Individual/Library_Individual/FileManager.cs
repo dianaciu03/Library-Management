@@ -16,7 +16,7 @@ namespace Library_Individual
     public class FileManager
     {
         private const string filePathLibrary = @"..\..\..\..\LibraryData.xml";
-        private const string filePathUsers = @"..\..\..\..\UsersData.csv";
+        private const string filePathEmployees = @"..\..\..\..\EmployeesData.csv";
         private const string filePathMembers = @"..\..\..\..\MembersData.csv";
 
         public Library LoadLibraryData()
@@ -34,6 +34,7 @@ namespace Library_Individual
                         typeof(Book),
                         typeof(BookGenre),
                         typeof(Loan),
+                        typeof(Member)
                     };
 
                     DataContractSerializer dcs = new(typeToSerialize, auxiliaryTypes);
@@ -63,6 +64,7 @@ namespace Library_Individual
                         typeof(Book),
                         typeof(BookGenre),
                         typeof(Loan),
+                        typeof(Member)
                     };
 
                     DataContractSerializer dcs = new(typeToSerialize);
@@ -75,37 +77,37 @@ namespace Library_Individual
             }
         }
 
-        public void WriteUsersToCSV(UserManager userManager)
+        public void WriteEmployeesToCSV(UserManager userManager)
         {
-            using (StreamWriter writer = new StreamWriter(filePathUsers))
+            using (StreamWriter writer = new StreamWriter(filePathEmployees))
             {
                 writer.WriteLine("Name,Id,Email,Password");
-                foreach (User user in userManager.GetUsers())
+                foreach (Employee employee in userManager.GetEmployees())
                 {
-                    writer.WriteLine($"{user.Name},{user.Id},{user.Email},{user.Password}");
+                    writer.WriteLine($"{employee.Name},{employee.Id},{employee.Email},{employee.Password}");
                 }
             }
         }
 
-        public void WriteMembersToCSV(Library library)
+        public void WriteMembersToCSV(UserManager userManager)
         {
             using (StreamWriter writer = new StreamWriter(filePathMembers))
             {
                 writer.WriteLine("Name,Id,Email,Phone");
-                foreach (Loan loan in library.GetLoans())
+                foreach (Member member in userManager.GetMembers())
                 {
-                    writer.WriteLine($"{loan.Name},{loan.Id},{loan.Email},{loan.Phone}");
+                    writer.WriteLine($"{member.Name},{member.Id},{member.Email},{member.Phone}");
                 }
             }
         }
 
-        public UserManager LoadUsersData() 
+        public UserManager LoadEmployeesData(UserManager userManager) 
         {
-            using (StreamReader reader = new StreamReader(filePathUsers))
+            using (StreamReader reader = new StreamReader(filePathEmployees))
             {
                 string line;
                 string[] fields;
-                UserManager userManager = new UserManager();
+
                 //Read the header line and ignore it
                 reader.ReadLine();
 
@@ -113,7 +115,27 @@ namespace Library_Individual
                 while ((line = reader.ReadLine()) != null)
                 {
                     fields = line.Split(',');
-                    userManager.AddUserToList(new User(fields[0], Convert.ToInt32(fields[1]), fields[2], fields[3]));                      
+                    userManager.AddEmployeeToList(new Employee(fields[0], Convert.ToInt32(fields[1]), fields[2], fields[3]));                      
+                }
+                return userManager;
+            }
+        }
+
+        public UserManager LoadMembersData(UserManager userManager)
+        {
+            using (StreamReader reader = new StreamReader(filePathMembers))
+            {
+                string line;
+                string[] fields;
+
+                //Read the header line and ignore it
+                reader.ReadLine();
+
+                //Read the rest of the lines and parse them into User objects
+                while ((line = reader.ReadLine()) != null)
+                {
+                    fields = line.Split(',');
+                    userManager.AddMemberToList(new Member(fields[0], Convert.ToInt32(fields[1]), fields[2], Convert.ToInt32(fields[3])));
                 }
                 return userManager;
             }
@@ -134,13 +156,15 @@ namespace Library_Individual
                     {
                         if(l.ReturnDate.Year != 1)
                         {
-                            string query = @$"INSERT INTO LoanHistory (Name, Id, Email, Phone, LoanedBooks, BorrowDate, ReturnDate) VALUES ('{l.Name}', '{l.Id}','{l.Email}', '{l.Phone}', '{l.StringBooks()}', '{l.BorowDate}', '{l.ReturnDate}')";
+                            string query = @$"INSERT INTO LoanHistory (Name, Id, Email, Phone, LoanedBooks, BorrowDate, ReturnDate) VALUES ('{l.Borrower.Name}', '{l.Borrower.Id}','{l.Borrower.Email}', '{l.Borrower.Phone}', '{l.StringBooks()}', '{l.BorowDate}', '{l.ReturnDate}')";
                             using (SqlCommand command1 = new SqlCommand(query, conn, transaction))
                             {
                                 int rowsAffected = command1.ExecuteNonQuery();
+                                MessageBox.Show(rowsAffected.ToString());
                             }
                         }
                         transaction.Commit();
+                        
                     }
                     catch (Exception ex)
                     {

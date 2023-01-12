@@ -5,7 +5,7 @@ namespace Library_Individual
         UserManager userManager = new UserManager();
         FileManager fileManager = new FileManager();
         Library library = new Library();
-        User currentUser;
+        Employee currentUser;
 
         public LoginForm()
         {
@@ -19,24 +19,27 @@ namespace Library_Individual
             {
                 string email = tbEmailLogin.Text;
                 string password = tbPasswordLogin.Text;
+                bool foundEmployee = false;
 
-                foreach (User u in userManager.GetUsers())
+                foreach (Employee employee in userManager.GetEmployees())
                 {
-                    if (u.Email == email && u.Password == password)
+                    if (employee.Email == email && employee.Password == password)
                     {
-                        currentUser = u;
-                        fileManager.WriteUsersToCSV(userManager);
-                        //If credentials are correct, open user form
-                        this.Hide();
-                        UserForm userForm = new UserForm(currentUser, library, fileManager, userManager);
-                        userForm.ShowDialog();
-                        this.Close();
-                        break;
+                        foundEmployee = true;
+                        currentUser = employee;
                     }
-                    else
-                        lblEmailPasswordIncorrect.Visible = true;                        
                 }
 
+                if(foundEmployee == true)
+                {
+                    //If credentials are correct, open user form
+                    this.Hide();
+                    UserForm userForm = new UserForm(currentUser, library, fileManager, userManager);
+                    userForm.ShowDialog();
+                    this.Close();
+                }
+                else
+                    lblEmailPasswordIncorrect.Visible = true;
             }
             catch(Exception)
             {
@@ -59,9 +62,9 @@ namespace Library_Individual
                 {
                     if (!password.Contains(","))
                     {
-                        foreach (User u in userManager.GetUsers())
+                        foreach (Employee employee in userManager.GetEmployees())
                         {
-                            if (u.Id == id) //if the id matches, the account is already registered
+                            if (employee.Id == id) //if the id matches, the account is already registered
                             {
                                 exists = true;
                             }
@@ -69,10 +72,10 @@ namespace Library_Individual
 
                         if (exists == false) //create an account
                         {
-                            User user = new User(name, id, email, password);
-                            userManager.AddUserToList(user);
+                            Employee employee = new Employee(name, id, email, password);
+                            userManager.AddEmployeeToList(employee);
                             MessageBox.Show("Account created successfully!");
-                            fileManager.WriteUsersToCSV(userManager);
+                            fileManager.WriteEmployeesToCSV(userManager);
                             ClearFields();
                         }
                         else 
@@ -91,17 +94,13 @@ namespace Library_Individual
             } 
         }
 
-        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            fileManager.WriteUsersToCSV(userManager);
-        }
-
         //method to load data from files
         private void LoadData()
         {
             try
             {
-                userManager = fileManager.LoadUsersData();
+                userManager = fileManager.LoadEmployeesData(userManager);
+                userManager = fileManager.LoadMembersData(userManager);
                 library = fileManager.LoadLibraryData();
             }
             catch (Exception)

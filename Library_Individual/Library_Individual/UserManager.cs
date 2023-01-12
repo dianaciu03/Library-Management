@@ -9,27 +9,27 @@ namespace Library_Individual
 {
     public class UserManager
     {
-        private List<User> allUsers = new List<User>();
+        private List<Employee> allEmployees = new List<Employee>();
+        private List<Member> allMembers = new List<Member>();
 
-        public void AddUserToList(User user)
+        public void AddEmployeeToList(Employee employee)
         {
-            allUsers.Add(user);
+            allEmployees.Add(employee);
         }
 
-        public bool RemoveUserFromList(User user)
+        public void AddMemberToList(Member member)
         {
-            if(allUsers.Contains(user))
-            {
-                allUsers.Remove(user);
-                return true;
-            }
-            else
-                return false;       
+            allMembers.Add(member);
         }
 
-        public List<User> GetUsers()
+        public List<Employee> GetEmployees()
         {
-            return allUsers;
+            return allEmployees;
+        }
+
+        public List<Member> GetMembers()
+        {
+            return allMembers;
         }
     }
 }
